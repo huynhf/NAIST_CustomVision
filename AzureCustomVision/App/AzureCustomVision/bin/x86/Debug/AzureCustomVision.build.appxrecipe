@@ -10,22 +10,22 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>83995b6c-a3ad-49ba-9d76-5a689689394f</PackageIdentityName>
     <PackageIdentityPublisher>CN=DefaultCompany</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\AzureCustomVision.exe">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\AzureCustomVision.exe">
       <PackagePath>entrypoint\AzureCustomVision.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\fredh\.nuget\packages\microsoft.applicationinsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
@@ -346,13 +346,13 @@
     <AppxPackagedFile Include="C:\Users\fredh\.nuget\packages\system.xml.xmlserializer\4.0.10\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Unprocessed\Newtonsoft.Json.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Unprocessed\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\Unity 2017.4.1f1\Editor\Data\PlaybackEngines\MetroSupport\Players\UAP\dotnet\x86\Debug\UnityEngineProxy.dll">
       <PackagePath>UnityEngineProxy.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Unprocessed\WinRTLegacy.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Unprocessed\WinRTLegacy.dll">
       <PackagePath>WinRTLegacy.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\Unity 2017.4.1f1\Editor\Data\PlaybackEngines\MetroSupport\Players\UAP\dotnet\x86\Debug\UnityPlayer.dll">
@@ -376,70 +376,70 @@
     <AppxPackagedFile Include="C:\Program Files\Unity 2017.4.1f1\Editor\Data\PlaybackEngines\MetroSupport\Players\UAP\dotnet\x86\Debug\WinRTBridge.winmd">
       <PackagePath>WinRTBridge.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Resource.res">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Resource.res">
       <PackagePath>Resource.res</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\AudioPluginMsHRTF.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\AudioPluginMsHRTF.dll">
       <PackagePath>AudioPluginMsHRTF.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\boot.config">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\boot.config">
       <PackagePath>Data\boot.config</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\globalgamemanagers">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\globalgamemanagers">
       <PackagePath>Data\globalgamemanagers</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\level0">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\level0">
       <PackagePath>Data\level0</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\Resources\unity default resources">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\Resources\unity default resources">
       <PackagePath>Data\Resources\unity default resources</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\Resources\unity_builtin_extra">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\Resources\unity_builtin_extra">
       <PackagePath>Data\Resources\unity_builtin_extra</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\globalgamemanagers.assets">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\globalgamemanagers.assets">
       <PackagePath>Data\globalgamemanagers.assets</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\sharedassets0.assets">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\sharedassets0.assets">
       <PackagePath>Data\sharedassets0.assets</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\level0.resS">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\level0.resS">
       <PackagePath>Data\level0.resS</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\managedAssemblies.txt">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\managedAssemblies.txt">
       <PackagePath>Data\managedAssemblies.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\nativePlugins.txt">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\nativePlugins.txt">
       <PackagePath>Data\nativePlugins.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\sharedassets0.resource">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Data\sharedassets0.resource">
       <PackagePath>Data\sharedassets0.resource</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17134.0\\redist\Debug\x86\ucrtbased.dll">
@@ -448,173 +448,173 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TilemapModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TilemapModule.dll">
       <PackagePath>UnityEngine.TilemapModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TextRenderingModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TextRenderingModule.dll">
       <PackagePath>UnityEngine.TextRenderingModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TerrainPhysicsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TerrainPhysicsModule.dll">
       <PackagePath>UnityEngine.TerrainPhysicsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TerrainModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.TerrainModule.dll">
       <PackagePath>UnityEngine.TerrainModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SharedInternalsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SharedInternalsModule.dll">
       <PackagePath>UnityEngine.SharedInternalsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpriteMaskModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpriteMaskModule.dll">
       <PackagePath>UnityEngine.SpriteMaskModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpriteShapeModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpriteShapeModule.dll">
       <PackagePath>UnityEngine.SpriteShapeModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.StyleSheetsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.StyleSheetsModule.dll">
       <PackagePath>UnityEngine.StyleSheetsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UIElementsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UIElementsModule.dll">
       <PackagePath>UnityEngine.UIElementsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestWWWModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestWWWModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestWWWModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VehiclesModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VehiclesModule.dll">
       <PackagePath>UnityEngine.VehiclesModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VideoModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VideoModule.dll">
       <PackagePath>UnityEngine.VideoModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VRModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.VRModule.dll">
       <PackagePath>UnityEngine.VRModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.WebModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.WebModule.dll">
       <PackagePath>UnityEngine.WebModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.WindModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.WindModule.dll">
       <PackagePath>UnityEngine.WindModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestTextureModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestTextureModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestTextureModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UIModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UIModule.dll">
       <PackagePath>UnityEngine.UIModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UNETModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UNETModule.dll">
       <PackagePath>UnityEngine.UNETModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityAnalyticsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityAnalyticsModule.dll">
       <PackagePath>UnityEngine.UnityAnalyticsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityConnectModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityConnectModule.dll">
       <PackagePath>UnityEngine.UnityConnectModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestAudioModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestAudioModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestAudioModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UnityWebRequestModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ScreenCaptureModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ScreenCaptureModule.dll">
       <PackagePath>UnityEngine.ScreenCaptureModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AssetBundleModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AssetBundleModule.dll">
       <PackagePath>UnityEngine.AssetBundleModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AudioModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AudioModule.dll">
       <PackagePath>UnityEngine.AudioModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ClothModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ClothModule.dll">
       <PackagePath>UnityEngine.ClothModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CoreModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CoreModule.dll">
       <PackagePath>UnityEngine.CoreModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CrashReportingModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CrashReportingModule.dll">
       <PackagePath>UnityEngine.CrashReportingModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.DirectorModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.DirectorModule.dll">
       <PackagePath>UnityEngine.DirectorModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ARModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ARModule.dll">
       <PackagePath>UnityEngine.ARModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AccessibilityModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AccessibilityModule.dll">
       <PackagePath>UnityEngine.AccessibilityModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AIModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AIModule.dll">
       <PackagePath>UnityEngine.AIModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AnimationModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AnimationModule.dll">
       <PackagePath>UnityEngine.AnimationModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ParticlesLegacyModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ParticlesLegacyModule.dll">
       <PackagePath>UnityEngine.ParticlesLegacyModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ParticleSystemModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ParticleSystemModule.dll">
       <PackagePath>UnityEngine.ParticleSystemModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.PerformanceReportingModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.PerformanceReportingModule.dll">
       <PackagePath>UnityEngine.PerformanceReportingModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Physics2DModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Physics2DModule.dll">
       <PackagePath>UnityEngine.Physics2DModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.PhysicsModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.PhysicsModule.dll">
       <PackagePath>UnityEngine.PhysicsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.JSONSerializeModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.JSONSerializeModule.dll">
       <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.GameCenterModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.GameCenterModule.dll">
       <PackagePath>UnityEngine.GameCenterModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.GridModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.GridModule.dll">
       <PackagePath>UnityEngine.GridModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ImageConversionModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ImageConversionModule.dll">
       <PackagePath>UnityEngine.ImageConversionModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.IMGUIModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.IMGUIModule.dll">
       <PackagePath>UnityEngine.IMGUIModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.InputModule.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.InputModule.dll">
       <PackagePath>UnityEngine.InputModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Timeline.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Timeline.dll">
       <PackagePath>UnityEngine.Timeline.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\nunit.framework.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\nunit.framework.dll">
       <PackagePath>nunit.framework.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UI.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.UI.dll">
       <PackagePath>UnityEngine.UI.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpatialTracking.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpatialTracking.dll">
       <PackagePath>UnityEngine.SpatialTracking.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Analytics.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Analytics.dll">
       <PackagePath>UnityEngine.Analytics.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.HoloLens.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.HoloLens.dll">
       <PackagePath>UnityEngine.HoloLens.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.StandardEvents.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.StandardEvents.dll">
       <PackagePath>UnityEngine.StandardEvents.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Networking.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Networking.dll">
       <PackagePath>UnityEngine.Networking.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\Assembly-CSharp.dll">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\Assembly-CSharp.dll">
       <PackagePath>Assembly-CSharp.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\MR_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\Core\AzureCustomVision.exe">
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Debug\Core\AzureCustomVision.exe">
       <PackagePath>AzureCustomVision.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

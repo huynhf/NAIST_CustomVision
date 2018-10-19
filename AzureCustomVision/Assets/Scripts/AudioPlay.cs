@@ -42,7 +42,7 @@ public class AudioPlay : MonoBehaviour
                 if(audioName == audioClips[i].name)
                 {
                     // Load the Sphere sounds from the Resources folder
-                    aSrc.clip = audioClips[i]; //Resources.Load<AudioClip>("Impact");
+                    aSrc.clip = audioClips[i]; //Resources.Load<AudioClip>(audioClips[i].name);
                     aSrc.Play();
                     return;
                 }
