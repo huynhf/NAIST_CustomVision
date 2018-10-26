@@ -34,10 +34,9 @@ public class VoiceRecognizer : MonoBehaviour {
     /// </summary>
     void Start()
     {
+        Array arrayTags = CustomVisionTrainer.Instance.Tags.ToArray();
 
-        Array tagsArray = Enum.GetValues(typeof(CustomVisionTrainer.Tags));
-
-        foreach (object tagWord in tagsArray)
+        foreach (object tagWord in arrayTags)
         {
             _keywords.Add(tagWord.ToString(), () =>
             {

@@ -36,7 +36,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// <summary>
     /// The Tags accepted
     /// </summary>
-    internal enum Tags { Mouse, Keyboard }
+    internal List<string> Tags;
 
     /// <summary>
     /// The UI displaying the training Chapters
@@ -57,6 +57,8 @@ public class CustomVisionTrainer : MonoBehaviour {
     private void Start()
     {
         trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
+
+        GetTagsFromCloud();
     }
 
     internal void EnableTextDisplay(bool state)
@@ -78,11 +80,36 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// </summary>
     internal void VerifyTag(string spokenTag)
     {
-        if (spokenTag == Tags.Mouse.ToString() || spokenTag == Tags.Keyboard.ToString())
+        foreach (string tag in Tags)
         {
-            trainingUI_TextMesh.text = $"Tag chosen: {spokenTag}";
-            VoiceRecognizer.Instance.keywordRecognizer.Stop();
-            StartCoroutine(SubmitImageForTraining(ImageCapture.Instance.filePath, spokenTag));
+            if (spokenTag == tag)
+            {
+                trainingUI_TextMesh.text = $"Tag chosen: {spokenTag}";
+                VoiceRecognizer.Instance.keywordRecognizer.Stop();
+                StartCoroutine(SubmitImageForTraining(ImageCapture.Instance.filePath, spokenTag));
+            }
+        } 
+    }
+
+    internal IEnumerator GetTagsFromCloud()
+    {
+        Tags = new List<string>();
+
+        // Retrieving the Tags
+        string getTagIdEndpoint = string.Format("{0}{1}/tags", url, projectId);
+        using (UnityWebRequest www = UnityWebRequest.Get(getTagIdEndpoint))
+        {
+            www.SetRequestHeader("Training-Key", trainingKey);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            yield return www.SendWebRequest();
+            string jsonResponse = www.downloadHandler.text;
+
+            Tags_RootObject tagRootObject = JsonConvert.DeserializeObject<Tags_RootObject>(jsonResponse);
+
+            foreach (TagOfProject tOP in tagRootObject.Tags)
+            {
+                Tags.Add(tOP.Name);
+            }
         }
     }
 
