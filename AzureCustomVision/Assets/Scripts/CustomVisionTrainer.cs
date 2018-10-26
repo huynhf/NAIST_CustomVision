@@ -59,9 +59,14 @@ public class CustomVisionTrainer : MonoBehaviour {
         trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
     }
 
+    internal void EnableTextDisplay(bool state)
+    {
+        trainingUI_TextMesh.gameObject.SetActive(state);
+    }
+
     internal void RequestTagSelection()
     {
-        trainingUI_TextMesh.gameObject.SetActive(true);
+        EnableTextDisplay(true);
         trainingUI_TextMesh.text = $" \nUse voice command \nto choose between the following tags: \nMouse\nKeyboard \nor say Discard";
 
         VoiceRecognizer.Instance.keywordRecognizer.Start();

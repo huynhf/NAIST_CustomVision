@@ -23,6 +23,13 @@ public class SceneOrganiser : MonoBehaviour {
     internal TextMesh cameraStatusIndicator;
 
     /// <summary>
+    /// Name of the recognized object /!\ Only in AppModes.Smart mode
+    /// </summary>
+    internal string RecognizedObject { get; set; }
+
+    internal int recognizedObjects;
+
+    /// <summary>
     /// Reference to the last label positioned
     /// </summary>
     internal Transform lastLabelPlaced;
@@ -175,6 +182,8 @@ public class SceneOrganiser : MonoBehaviour {
 
         if (analysisObject.Predictions != null)
         {
+            recognizedObjects = 0;
+            
             foreach (Prediction p in analysisObject.Predictions)
             {
                 if (p.Probability > 0.02)
@@ -182,9 +191,20 @@ public class SceneOrganiser : MonoBehaviour {
                     lastLabelPlacedText.text += $"Detected: {p.TagName} {p.Probability.ToString("0.00 \n")}";
                     Debug.Log($"Detected: {p.TagName} {p.Probability.ToString("0.00 \n")}");
                     AudioPlay.Instance.Play("Bell");
-                }
+
+                    RecognizedObject = p.TagName;
+                    recognizedObjects++;
+                }      
             }
+
+            if (recognizedObjects == 1)
+                ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
+            else if (recognizedObjects == 0)
+                ImageCapture.Instance.UploadPhotoAfterAnalysis(null);
+            else
+                ImageCapture.Instance.UploadPhotoAfterAnalysis("More than one");
         }
+        
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR.WSA.WebCam;
 
@@ -32,10 +33,12 @@ public class ImageCapture : MonoBehaviour {
     /// </summary>
     private float secondsBetweenCaptures = 10f;
 
+
+
     /// <summary>
     /// Application main functionalities switch
     /// </summary>
-    internal enum AppModes { Analysis, Training }
+    public enum AppModes { Analysis, Training, Smart }
 
     /// <summary>
     /// Local variable for current AppMode
@@ -60,7 +63,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Analysis;
+        AppMode = AppModes.Smart;
     }
 
     /// <summary>
@@ -138,9 +141,26 @@ public class ImageCapture : MonoBehaviour {
                     SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
                 }
                 break;
+
+            case AppModes.Smart:
+                if (!captureIsActive)
+                {
+                    captureIsActive = true;
+
+                    // Set the cursor color to red
+                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
+
+                    // Update camera status to looping capture.
+                    //SceneOrganiser.Instance.SetCameraStatus("Looping Capture");
+
+                    // Begin the capture loop
+                    //InvokeRepeating("ExecuteImageCaptureAnalysisAndUpload", 0, secondsBetweenCaptures);
+                    ExecuteImageCaptureAndAnalysis();
+                }
+                break;
         }
     }
-    
+
     /// <summary>
     /// Begin process of Image Capturing and send To Azure Custom Vision Service.
     /// </summary>
@@ -148,7 +168,7 @@ public class ImageCapture : MonoBehaviour {
     {
         // Update camera status to analysis.
         SceneOrganiser.Instance.SetCameraStatus("Analysis");
-        
+
         // Create a label in world space using the SceneOrganiser class 
         // Invisible at this point but correctly positioned where the image was taken
         SceneOrganiser.Instance.PlaceAnalysisLabel();
@@ -210,6 +230,7 @@ public class ImageCapture : MonoBehaviour {
         switch (AppMode)
         {
             case AppModes.Analysis:
+            case AppModes.Smart:
                 // Call the image analysis
                 StartCoroutine(CustomVisionAnalyser.Instance.AnalyseLastImageCaptured(filePath));
                 break;
@@ -221,12 +242,39 @@ public class ImageCapture : MonoBehaviour {
         }
     }
 
+    public void UploadPhotoAfterAnalysis(string tag)
+    {
+        if(AppMode == AppModes.Smart)
+        {
+            // Update camera status to uploading image.
+            SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
+
+            // Call training using captured image
+            if(tag == "More than one")
+            {
+                //Reset scene
+                ResetImageCapture();
+            }
+            else if (tag == null)
+                CustomVisionTrainer.Instance.RequestTagSelection();
+            else
+            {
+                //Upload photo with recognized tag
+                CustomVisionTrainer.Instance.EnableTextDisplay(true);
+                CustomVisionTrainer.Instance.VerifyTag(tag);
+            } 
+        }
+    }
+
     /// <summary>
     /// Stops all capture pending actions
     /// </summary>
     internal void ResetImageCapture()
     {
         captureIsActive = false;
+
+        //Disable the Training Text
+        CustomVisionTrainer.Instance.EnableTextDisplay(false);
 
         // Set the cursor color to green
         SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.green;
