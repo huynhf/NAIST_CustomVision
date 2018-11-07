@@ -5,7 +5,7 @@ VisualStudioVersion = 15.8.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureCustomVision", "AzureCustomVision\AzureCustomVision.csproj", "{13A45C13-3265-47B8-BC48-A553B569DF55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "C:\Hololens\MR_CustomVision\AzureCustomVision\App\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj", "{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj", "{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,29 +47,29 @@ Global
 		{13A45C13-3265-47B8-BC48-A553B569DF55}.Release|x86.ActiveCfg = Release|x86
 		{13A45C13-3265-47B8-BC48-A553B569DF55}.Release|x86.Build.0 = Release|x86
 		{13A45C13-3265-47B8-BC48-A553B569DF55}.Release|x86.Deploy.0 = Release|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|ARM.ActiveCfg = Debug|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|ARM.Build.0 = Debug|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|x64.ActiveCfg = Debug|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|x64.Build.0 = Debug|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|x86.ActiveCfg = Debug|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Debug|x86.Build.0 = Debug|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|ARM.ActiveCfg = Master|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|ARM.Build.0 = Master|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|x64.ActiveCfg = Master|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|x64.Build.0 = Master|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|x86.ActiveCfg = Master|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Master|x86.Build.0 = Master|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|ARM.ActiveCfg = Release|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|ARM.Build.0 = Release|ARM
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|x64.ActiveCfg = Release|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|x64.Build.0 = Release|x64
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|x86.ActiveCfg = Release|x86
-		{964ACCE6-FBFF-4D00-8A21-F443C96FAFE1}.Release|x86.Build.0 = Release|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|ARM.Build.0 = Debug|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|x64.ActiveCfg = Debug|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|x64.Build.0 = Debug|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|x86.ActiveCfg = Debug|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Debug|x86.Build.0 = Debug|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|ARM.ActiveCfg = Master|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|ARM.Build.0 = Master|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|x64.ActiveCfg = Master|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|x64.Build.0 = Master|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|x86.ActiveCfg = Master|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Master|x86.Build.0 = Master|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|ARM.ActiveCfg = Release|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|ARM.Build.0 = Release|ARM
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|x64.ActiveCfg = Release|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|x64.Build.0 = Release|x64
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|x86.ActiveCfg = Release|x86
+		{F23AA21A-4F7E-4728-A5F9-D8346E824E4A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B778FD9A-B988-49BC-A428-B7184330D8E6}
+		SolutionGuid = {8CF695F8-8608-4059-BAB8-06E98A2B430C}
 	EndGlobalSection
 EndGlobal
