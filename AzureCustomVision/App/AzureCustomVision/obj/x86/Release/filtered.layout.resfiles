@@ -12,10 +12,19 @@ Data\level0
 Data\level0.resS
 Data\managedAssemblies.txt
 Data\nativePlugins.txt
+Data\resources.assets
+Data\resources.assets.resS
 Data\Resources\unity default resources
 Data\Resources\unity_builtin_extra
 Data\sharedassets0.assets
+Data\sharedassets0.assets.resS
 Data\sharedassets0.resource
+GpuTiming.dll
+GpuTiming.pdb
+MicStreamSelector.dll
+MicStreamSelector.pdb
+PlaneFinding.dll
+PlaneFinding.pdb
 Properties\Default.rd.xml
 Resource.res
 WinMetadata\Windows.winmd

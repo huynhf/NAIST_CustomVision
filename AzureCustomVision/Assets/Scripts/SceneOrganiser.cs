@@ -82,6 +82,11 @@ public class SceneOrganiser : MonoBehaviour {
         SetCameraStatus("Loading");
     }
 
+    void Start()
+    {
+        //DialogManager.Instance.launchDialog(1);
+    }
+
     /// <summary>
     /// Spawns cursor for the Main Camera
     /// </summary>

@@ -27,16 +27,17 @@ public class AfterGestureRecognition : MonoBehaviour {
     {
         StartCoroutine(Wait(2f));
         DialogManager.Instance.launchDialog(1);
+        CursorAnimManager.Instance.LoadingStart();
     }
 
     public void ExtraHoldCompleted()
     {
-
+        //cursorAnim.SetBool(waitingHash, false);
     }
 
     public void ExtraHoldCanceled()
     {
-
+        
     }
 
     private IEnumerator Wait(float sec)

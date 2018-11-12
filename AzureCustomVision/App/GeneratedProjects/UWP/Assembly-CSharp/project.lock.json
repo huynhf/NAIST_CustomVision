@@ -15778,12 +15778,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Hololens\\MR_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
+      "projectUniqueName": "C:\\Hololens\\NAIST_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
       "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Hololens\\MR_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
-      "projectJsonPath": "C:\\Hololens\\MR_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\project.json",
+      "projectPath": "C:\\Hololens\\NAIST_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
+      "projectJsonPath": "C:\\Hololens\\NAIST_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\project.json",
       "packagesPath": "C:\\Users\\fredh\\.nuget\\packages\\",
-      "outputPath": "C:\\Hololens\\MR_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\obj\\",
+      "outputPath": "C:\\Hololens\\NAIST_CustomVision\\AzureCustomVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\fredh\\AppData\\Roaming\\NuGet\\NuGet.Config",

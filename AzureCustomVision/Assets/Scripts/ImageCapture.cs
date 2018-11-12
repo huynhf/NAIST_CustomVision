@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR.WSA.WebCam;
 
 public class ImageCapture : MonoBehaviour {
@@ -22,11 +21,6 @@ public class ImageCapture : MonoBehaviour {
     /// Photo Capture object
     /// </summary>
     private PhotoCapture photoCaptureObject = null;
-
-    /// <summary>
-    /// Allows gestures recognition in HoloLens
-    /// </summary>
-    private GestureRecognizer recognizer;
 
     /// <summary>
     /// Loop timer
@@ -86,79 +80,10 @@ public class ImageCapture : MonoBehaviour {
             }
         }
 
-        // Subscribing to the Hololens API gesture recognizer to track user gestures
-        recognizer = new GestureRecognizer();
-        recognizer.SetRecognizableGestures(GestureSettings.Tap);
-        recognizer.Tapped += TapHandler;
-        recognizer.StartCapturingGestures();
+        
 
         SceneOrganiser.Instance.SetCameraStatus("Ready");
         AudioPlay.Instance.Play("Piano");
-    }
-
-    /// <summary>
-    /// Respond to Tap Input.
-    /// </summary>
-    private void TapHandler(TappedEventArgs obj)
-    {
-        AudioPlay.Instance.Play("Button_Press");
-        switch (AppMode)
-        {
-            case AppModes.Analysis:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to looping capture.
-                    SceneOrganiser.Instance.SetCameraStatus("Looping Capture");
-
-                    // Begin the capture loop
-                    InvokeRepeating("ExecuteImageCaptureAndAnalysis", 0, secondsBetweenCaptures);
-                }
-                else
-                {
-                    // The user tapped while the app was analyzing 
-                    // therefore stop the analysis process
-                    ResetImageCapture();
-                }
-                break;
-
-            case AppModes.Training:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Call the image capture
-                    ExecuteImageCaptureAndAnalysis();
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to uploading image.
-                    SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
-                }
-                break;
-
-            case AppModes.Smart:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to looping capture.
-                    //SceneOrganiser.Instance.SetCameraStatus("Looping Capture");
-
-                    // Begin the capture loop
-                    //InvokeRepeating("ExecuteImageCaptureAnalysisAndUpload", 0, secondsBetweenCaptures);
-                    ExecuteImageCaptureAndAnalysis();
-                }
-                break;
-        }
     }
 
     /// <summary>

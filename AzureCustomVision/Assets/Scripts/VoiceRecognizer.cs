@@ -54,6 +54,14 @@ public class VoiceRecognizer : MonoBehaviour {
             keywordRecognizer.Stop();
         });
 
+        _keywords.Add("Add object", () =>
+        {
+            // When a word is recognized, the following line will be called
+            // The user wants to add a new object for recognition
+            CustomVisionTrainer.Instance.AddNewObject();
+            keywordRecognizer.Stop();
+        });
+
         //Create the keyword recognizer 
         keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());
 
