@@ -7,7 +7,7 @@
 # Default behavior is to never overwrite files
 AzureCustomVision.sln: modified
 AzureCustomVision\App.cs: 8F8E14F9205DC6C13FD2CDA2D7E5A6FA
-AzureCustomVision\AzureCustomVision.csproj: DC2CBDA8081F39E3203B64F9EFEF8BEC
+AzureCustomVision\AzureCustomVision.csproj: 0B8B4F7B367E4D624FCF68DB248D28C2
 AzureCustomVision\AzureCustomVision.csproj.user: modified
 AzureCustomVision\Package.appxmanifest: 55609BBCA96B5A000BA2CF120EFD5295
 AzureCustomVision\project.json: 1D02BC64BAC0D041019673A1C4C51737

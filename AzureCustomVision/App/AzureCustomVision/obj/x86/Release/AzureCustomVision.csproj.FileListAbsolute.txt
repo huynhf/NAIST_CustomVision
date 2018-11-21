@@ -310,3 +310,5 @@ C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\obj\x86\R
 C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Release\GLTFSerializationUWP.dll
 C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Release\Newtonsoft.Json.pdb
 C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Release\GLTFSerializationUWP.pdb
+C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Release\TextMeshPro-2017.3-Runtime.dll
+C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\bin\x86\Release\TextMeshPro-2017.3-Runtime.pdb

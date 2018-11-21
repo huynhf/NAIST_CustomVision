@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92c7426b-5dd9-40a7-ac90-4808a62f971f}</ProjectGuid>
+    <ProjectGuid>{376522d9-d753-41ad-ac83-bc35abd96d70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AssemblyCSharpWSA</RootNamespace>
@@ -227,6 +227,10 @@
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.ARModule">
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.ARModule.dll</HintPath>
       <Private>False</Private>
@@ -247,14 +251,6 @@
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.CrashReportingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.AnimationModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.AccessibilityModule">
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.AccessibilityModule.dll</HintPath>
       <Private>False</Private>
@@ -263,8 +259,8 @@
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.AIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.DirectorModule.dll</HintPath>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.CrashReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule">
@@ -289,6 +285,10 @@
     </Reference>
     <Reference Include="UnityEngine.InputModule">
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.DirectorModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
@@ -333,6 +333,10 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.SpatialTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TextMeshPro-2017.3-Runtime">
+      <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\TextMeshPro-2017.3-Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
@@ -1486,8 +1490,14 @@
     <Compile Include="$(UnityProjectDir)Assets\HoloToolkit\UX\Scripts\UsabilityUtilities.cs">
       <Link>HoloToolkit\UX\Scripts\UsabilityUtilities.cs</Link>
     </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\Scripts\AfterGestureRecognition.cs">
+      <Link>Scripts\AfterGestureRecognition.cs</Link>
+    </Compile>
     <Compile Include="$(UnityProjectDir)Assets\Scripts\AudioPlay.cs">
       <Link>Scripts\AudioPlay.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\Scripts\CursorManager.cs">
+      <Link>Scripts\CursorManager.cs</Link>
     </Compile>
     <Compile Include="$(UnityProjectDir)Assets\Scripts\CustomVisionAnalyser.cs">
       <Link>Scripts\CustomVisionAnalyser.cs</Link>
@@ -1504,11 +1514,113 @@
     <Compile Include="$(UnityProjectDir)Assets\Scripts\ImageCapture.cs">
       <Link>Scripts\ImageCapture.cs</Link>
     </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\Scripts\RichDialogShell.cs">
+      <Link>Scripts\RichDialogShell.cs</Link>
+    </Compile>
     <Compile Include="$(UnityProjectDir)Assets\Scripts\SceneOrganiser.cs">
       <Link>Scripts\SceneOrganiser.cs</Link>
     </Compile>
     <Compile Include="$(UnityProjectDir)Assets\Scripts\VoiceRecognizer.cs">
       <Link>Scripts\VoiceRecognizer.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs</Link>
+    </Compile>
+    <Compile Include="$(UnityProjectDir)Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs">
+      <Link>TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs</Link>
     </Compile>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

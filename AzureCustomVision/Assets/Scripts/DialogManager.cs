@@ -118,7 +118,7 @@ public class DialogManager : MonoBehaviour {
     {
         // Get the result text from the Dialog
         //resultTextMesh.text = result.Result.ToString();
-        CursorAnimManager.Instance.LoadingStop();
+        CursorManager.Instance.LoadingStop();
     }
 }
 

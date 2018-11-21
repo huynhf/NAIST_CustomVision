@@ -536,6 +536,9 @@
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.PhysicsModule.dll">
       <PackagePath>UnityEngine.PhysicsModule.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AnimationModule.dll">
+      <PackagePath>UnityEngine.AnimationModule.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.ARModule.dll">
       <PackagePath>UnityEngine.ARModule.dll</PackagePath>
     </AppxPackagedFile>
@@ -551,20 +554,14 @@
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CoreModule.dll">
       <PackagePath>UnityEngine.CoreModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CrashReportingModule.dll">
-      <PackagePath>UnityEngine.CrashReportingModule.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AnimationModule.dll">
-      <PackagePath>UnityEngine.AnimationModule.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AccessibilityModule.dll">
       <PackagePath>UnityEngine.AccessibilityModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.AIModule.dll">
       <PackagePath>UnityEngine.AIModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.DirectorModule.dll">
-      <PackagePath>UnityEngine.DirectorModule.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.CrashReportingModule.dll">
+      <PackagePath>UnityEngine.CrashReportingModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.JSONSerializeModule.dll">
       <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
@@ -583,6 +580,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.InputModule.dll">
       <PackagePath>UnityEngine.InputModule.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.DirectorModule.dll">
+      <PackagePath>UnityEngine.DirectorModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
@@ -613,6 +613,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.SpatialTracking.dll">
       <PackagePath>UnityEngine.SpatialTracking.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\TextMeshPro-2017.3-Runtime.dll">
+      <PackagePath>TextMeshPro-2017.3-Runtime.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\UnityEngine.Analytics.dll">
       <PackagePath>UnityEngine.Analytics.dll</PackagePath>

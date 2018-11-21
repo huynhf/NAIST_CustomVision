@@ -16,6 +16,8 @@ namespace HoloToolkit.UX.Buttons
 
         private DialogShell parentDialog;
 
+        private RichDialogShell parentRichDialog;
+
         /// <summary>
         /// A reference to the Dialog that this button is on.
         /// </summary>
@@ -28,6 +30,21 @@ namespace HoloToolkit.UX.Buttons
             set
             {
                 parentDialog = value;
+            }
+        }
+
+        /// <summary>
+        /// A reference to the Dialog that this button is on.
+        /// </summary>
+        public RichDialogShell ParentRichDialog
+        {
+            get
+            {
+                return parentRichDialog;
+            }
+            set
+            {
+                parentRichDialog = value;
             }
         }
 

@@ -1,9 +1,13 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class AfterGestureRecognition : MonoBehaviour {
 
     public static AfterGestureRecognition Instance;
+
+    [SerializeField]
+    private Transform cursorPrefab;
 
     private void Awake()
     {
@@ -26,8 +30,9 @@ public class AfterGestureRecognition : MonoBehaviour {
     public void ExtraHoldStarted()
     {
         StartCoroutine(Wait(2f));
-        DialogManager.Instance.launchDialog(1);
-        CursorAnimManager.Instance.LoadingStart();
+        //DialogManager.Instance.launchDialog(1);
+        //CursorManager.Instance.LoadingStart();
+        CreateLabelInSpace("Sample text");
     }
 
     public void ExtraHoldCompleted()
@@ -43,5 +48,32 @@ public class AfterGestureRecognition : MonoBehaviour {
     private IEnumerator Wait(float sec)
     {
         yield return new WaitForSeconds(sec);
+    }
+
+    private void CreateLabelInSpace(string text)
+    {
+        GameObject panel = new GameObject("Label");
+        TextMeshPro label = panel.AddComponent<TextMeshPro>();
+        //label.fontSize = 1;
+        label.fontSizeMin = 1;
+        label.fontSizeMax = 70;
+        label.enableAutoSizing = true;
+        label.rectTransform.sizeDelta = new Vector2 (5,1f);
+        label.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+
+        // Do a raycast into the world based on the user's
+        // head position and orientation.
+        var headPosition = Camera.main.transform.position;
+        var gazeDirection = Camera.main.transform.forward;
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
+        {
+            // If the raycast hit a hologram, use that as the focused object.
+            label.transform.position = hitInfo.point;
+            label.transform.Translate(Vector3.back * 0.1f, Space.World);
+            label.transform.Translate(Vector3.up * 0.2f, Space.World);
+            label.text = label.transform.position.ToString();
+        }
     }
 }
