@@ -1,2 +1,0 @@
-C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\AzureCustomVision\AzureCustomVision.csproj;arm
-C:\Hololens\NAIST_CustomVision\AzureCustomVision\App\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj;arm
