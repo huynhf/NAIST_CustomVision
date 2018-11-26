@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AfterGestureRecognition : MonoBehaviour {
 
@@ -29,7 +30,7 @@ public class AfterGestureRecognition : MonoBehaviour {
 
     public void ExtraHoldStarted()
     {
-        StartCoroutine(Wait(2f));
+        //StartCoroutine(Wait(2f));
         //DialogManager.Instance.launchDialog(1);
         //CursorManager.Instance.LoadingStart();
         CreateLabelInSpace("Sample text");
@@ -71,6 +72,7 @@ public class AfterGestureRecognition : MonoBehaviour {
         {
             // If the raycast hit a hologram, use that as the focused object.
             label.transform.position = hitInfo.point;
+            label.transform.rotation = Quaternion.LookRotation(gazeDirection);// * Quaternion.Euler(0, 90, 0);
             label.transform.Translate(Vector3.back * 0.1f, Space.World);
             label.transform.Translate(Vector3.up * 0.2f, Space.World);
             label.text = label.transform.position.ToString();
