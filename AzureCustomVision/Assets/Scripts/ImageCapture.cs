@@ -37,7 +37,7 @@ public class ImageCapture : MonoBehaviour {
     /// <summary>
     /// Local variable for current AppMode
     /// </summary>
-    internal AppModes AppMode { get; private set; }
+    public AppModes AppMode { get; private set; }
 
     /// <summary>
     /// Flagging if the capture loop is running
@@ -57,7 +57,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Smart;
+        AppMode = AppModes.Analysis;
     }
 
     /// <summary>
@@ -80,19 +80,19 @@ public class ImageCapture : MonoBehaviour {
             }
         }
 
-        
-
         SceneOrganiser.Instance.SetCameraStatus("Ready");
-        AudioPlay.Instance.Play("Piano");
     }
 
     /// <summary>
     /// Begin process of Image Capturing and send To Azure Custom Vision Service.
     /// </summary>
-    private void ExecuteImageCaptureAndAnalysis()
+    public void ExecuteImageCaptureAndAnalysis()
     {
         // Update camera status to analysis.
         SceneOrganiser.Instance.SetCameraStatus("Analysis");
+
+        //Change cursor animation to Loading status
+        CursorManager.Instance.LoadingStart();
 
         // Create a label in world space using the SceneOrganiser class 
         // Invisible at this point but correctly positioned where the image was taken
@@ -199,13 +199,16 @@ public class ImageCapture : MonoBehaviour {
         captureIsActive = false;
 
         //Disable the Training Text
-        CustomVisionTrainer.Instance.EnableTextDisplay(false);
+        //CustomVisionTrainer.Instance.EnableTextDisplay(false);
 
-        // Set the cursor color to green
-        SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.green;
+        // Set the cursor to Normal state (Idle)
+        CursorManager.Instance.LoadingStop();
 
         // Update camera status to ready.
         SceneOrganiser.Instance.SetCameraStatus("Ready");
+
+        //Make a sound to notify the user
+        AudioPlay.Instance.Play("Bell");
 
         // Stop the capture loop if active
         CancelInvoke();

@@ -56,7 +56,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// </summary>
     private void Start()
     {
-        trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
+        //trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
 
         GetTagsFromCloud();
     }

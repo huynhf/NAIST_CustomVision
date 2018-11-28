@@ -62,7 +62,7 @@ public class CustomVisionAnalyser : MonoBehaviour {
             string jsonResponse = unityWebRequest.downloadHandler.text;
 
             // The response will be in JSON format, therefore it needs to be deserialized    
-
+            DialogManager.Instance.LaunchDialog(HoloToolkit.UX.Dialog.DialogButtonType.OK, "Json", jsonResponse);
             // The following lines refers to a class that you will build in later Chapters
             // Wait until then to uncomment these lines
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class SceneOrganiser : MonoBehaviour {
 
@@ -8,19 +9,16 @@ public class SceneOrganiser : MonoBehaviour {
     public static SceneOrganiser Instance;
 
     /// <summary>
-    /// The cursor object attached to the camera
+    /// Reference to the label currently used to display the analysis on the objects in the real world
+    /// Equal to null if analysis completed
     /// </summary>
-    internal GameObject cursor;
-
-    /// <summary>
-    /// The label used to display the analysis on the objects in the real world
-    /// </summary>
-    internal GameObject label;
+    internal GameObject currentLabel = null;
 
     /// <summary>
     /// Object providing the current status of the camera.
     /// </summary>
-    internal TextMesh cameraStatusIndicator;
+    [SerializeField]
+    internal TextMeshPro cameraStatusIndicator;
 
     /// <summary>
     /// Name of the recognized object /!\ Only in AppModes.Smart mode
@@ -32,12 +30,7 @@ public class SceneOrganiser : MonoBehaviour {
     /// <summary>
     /// Reference to the last label positioned
     /// </summary>
-    internal Transform lastLabelPlaced;
-
-    /// <summary>
-    /// Reference to the last label positioned
-    /// </summary>
-    internal TextMesh lastLabelPlacedText;
+    internal TextMeshPro lastLabelPlaced = null;
 
     /// <summary>
     /// Current threshold accepted for displaying the label
@@ -68,15 +61,9 @@ public class SceneOrganiser : MonoBehaviour {
         // Add the CustomVisionObjects class to this GameObject
         gameObject.AddComponent<CustomVisionObjects>();
 
-        // Create the camera Cursor
-        cursor = CreateCameraCursor();
-
-        // Load the label prefab as reference
-        label = CreateLabel();
-
         // Create the camera status indicator label, and place it above where predictions
         // and training UI will appear.
-        cameraStatusIndicator = CreateTrainingUI("Status Indicator", 0.02f, 0.2f, 3, true);
+        
 
         // Set camera status indicator to loading.
         SetCameraStatus("Loading");
@@ -84,52 +71,12 @@ public class SceneOrganiser : MonoBehaviour {
 
     void Start()
     {
-        //DialogManager.Instance.launchDialog(1);
+        AudioPlay.Instance.Play("Piano");
     }
 
-    /// <summary>
-    /// Spawns cursor for the Main Camera
-    /// </summary>
-    private GameObject CreateCameraCursor()
+    void Update()
     {
-        // Create a sphere as new cursor
-        GameObject newCursor = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
-        // Attach it to the camera
-        newCursor.transform.parent = gameObject.transform;
-
-        // Resize the new cursor
-        newCursor.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
-
-        // Move it to the correct position
-        newCursor.transform.localPosition = new Vector3(0, 0, 4);
-
-        // Set the cursor color to red
-        newCursor.GetComponent<Renderer>().material = new Material(Shader.Find("Diffuse"));
-        newCursor.GetComponent<Renderer>().material.color = Color.green;
-
-        return newCursor;
-    }
-
-    /// <summary>
-    /// Create the analysis label object
-    /// </summary>
-    private GameObject CreateLabel()
-    {
-        // Create a sphere as new cursor
-        GameObject newLabel = new GameObject();
-
-        // Resize the new cursor
-        newLabel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-
-        // Creating the text of the label
-        TextMesh t = newLabel.AddComponent<TextMesh>();
-        t.anchor = TextAnchor.MiddleCenter;
-        t.alignment = TextAlignment.Center;
-        t.fontSize = 50;
-        t.text = "";
-
-        return newLabel;
+        cameraStatusIndicator.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
     }
 
     /// <summary>
@@ -165,7 +112,7 @@ public class SceneOrganiser : MonoBehaviour {
                     break;
             }
 
-            cameraStatusIndicator.GetComponent<TextMesh>().text = $"Camera Status:\n<color={message}>{statusText}..</color>";
+            cameraStatusIndicator.GetComponent<TextMeshPro>().text = $"Camera Status:\n<color={message}>{statusText}..</color>";
         }
     }
 
@@ -174,8 +121,31 @@ public class SceneOrganiser : MonoBehaviour {
     /// </summary>
     public void PlaceAnalysisLabel()
     {
-        lastLabelPlaced = Instantiate(label.transform, cursor.transform.position, transform.rotation);
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
+        GameObject panel = new GameObject("Label");
+        TextMeshPro label = panel.AddComponent<TextMeshPro>();
+        label.fontSizeMin = 1;
+        label.fontSizeMax = 70;
+        label.enableAutoSizing = true;
+        label.rectTransform.sizeDelta = new Vector2(5, 1f);
+        label.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+
+        // Do a raycast into the world based on the user's
+        // head position and orientation.
+        var headPosition = Camera.main.transform.position;
+        var gazeDirection = Camera.main.transform.forward;
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
+        {
+            // If the raycast hit a hologram, use that as the focused object.
+            label.transform.position = hitInfo.point;
+            label.transform.Translate(Vector3.back * 0.1f, Space.World);
+            label.transform.Translate(Vector3.up * 0.1f, Space.World);
+            label.transform.rotation = Quaternion.LookRotation(gazeDirection);// * Quaternion.Euler(0, 90, 0);
+            //label.text = label.transform.position.ToString(); //Uncomment only to know position while testing
+
+            lastLabelPlaced = label;
+        }
     }
 
     /// <summary>
@@ -183,9 +153,9 @@ public class SceneOrganiser : MonoBehaviour {
     /// </summary>
     public void SetTagsToLastLabel(AnalysisObject analysisObject)
     {
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
+        //lastLabelPlaced = lastLabelPlaced.GetComponent<TextMeshPro>();
 
-        if (analysisObject.Predictions != null)
+        if (analysisObject.Predictions != null && lastLabelPlaced != null)
         {
             recognizedObjects = 0;
             
@@ -193,21 +163,30 @@ public class SceneOrganiser : MonoBehaviour {
             {
                 if (p.Probability > 0.02)
                 {
-                    lastLabelPlacedText.text += $"Detected: {p.TagName} {p.Probability.ToString("0.00 \n")}";
+                    lastLabelPlaced.text += $"Detected: {p.TagName} {p.Probability.ToString("0.00 \n")}";
                     Debug.Log($"Detected: {p.TagName} {p.Probability.ToString("0.00 \n")}");
-                    AudioPlay.Instance.Play("Bell");
 
                     RecognizedObject = p.TagName;
                     recognizedObjects++;
                 }      
             }
 
-            if (recognizedObjects == 1)
-                ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
-            else if (recognizedObjects == 0)
-                ImageCapture.Instance.UploadPhotoAfterAnalysis(null);
-            else
-                ImageCapture.Instance.UploadPhotoAfterAnalysis("More than one");
+            if (recognizedObjects == 0)
+                lastLabelPlaced.text = "Unknown";
+
+            if (ImageCapture.Instance.AppMode == ImageCapture.AppModes.Smart)
+            {
+                if (recognizedObjects == 1)
+                    ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
+                else if (recognizedObjects == 0)
+                    ImageCapture.Instance.UploadPhotoAfterAnalysis(null);
+                else
+                    ImageCapture.Instance.UploadPhotoAfterAnalysis("More than one");
+            }
+            else //In AppMode.Analysis
+            {
+                ImageCapture.Instance.ResetImageCapture();
+            }
         }
         
     }
@@ -221,17 +200,17 @@ public class SceneOrganiser : MonoBehaviour {
     /// <param name="zPos">distance from the camera</param>
     /// <param name="setActive">whether the text mesh should be visible when it has been created</param>
     /// <returns>Returns a 3D text mesh within the scene</returns>
-    internal TextMesh CreateTrainingUI(string name, float scale, float yPos, float zPos, bool setActive)
-    {
-        GameObject display = new GameObject(name, typeof(TextMesh));
-        display.transform.parent = Camera.main.transform;
-        display.transform.localPosition = new Vector3(0, yPos, zPos);
-        display.SetActive(setActive);
-        display.transform.localScale = new Vector3(scale, scale, scale);
-        display.transform.rotation = new Quaternion();
-        TextMesh textMesh = display.GetComponent<TextMesh>();
-        textMesh.anchor = TextAnchor.MiddleCenter;
-        textMesh.alignment = TextAlignment.Center;
-        return textMesh;
-    }
+    //internal TextMeshPro CreateTrainingUI(string name, float scale, float yPos, float zPos, bool setActive)
+    //{
+    //    GameObject display = new GameObject(name, typeof(TextMesh));
+    //    display.transform.parent = Camera.main.transform;
+    //    display.transform.localPosition = new Vector3(0, yPos, zPos);
+    //    display.SetActive(setActive);
+    //    display.transform.localScale = new Vector3(scale, scale, scale);
+    //    display.transform.rotation = new Quaternion();
+    //    TextMeshPro textMesh = display.GetComponent<TextMesh>();
+    //    textMesh.anchor = TextAnchor.MiddleCenter;
+    //    textMesh.alignment = TextAlignment.Center;
+    //    return textMesh;
+    //}
 }
