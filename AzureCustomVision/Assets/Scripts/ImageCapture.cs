@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR.WSA.WebCam;
 
 public class ImageCapture : MonoBehaviour {
@@ -24,11 +23,6 @@ public class ImageCapture : MonoBehaviour {
     private PhotoCapture photoCaptureObject = null;
 
     /// <summary>
-    /// Allows gestures recognition in HoloLens
-    /// </summary>
-    private GestureRecognizer recognizer;
-
-    /// <summary>
     /// Loop timer
     /// </summary>
     private float secondsBetweenCaptures = 10f;
@@ -43,7 +37,7 @@ public class ImageCapture : MonoBehaviour {
     /// <summary>
     /// Local variable for current AppMode
     /// </summary>
-    internal AppModes AppMode { get; private set; }
+    public AppModes AppMode { get; private set; }
 
     /// <summary>
     /// Flagging if the capture loop is running
@@ -63,7 +57,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Smart;
+        AppMode = AppModes.Analysis;
     }
 
     /// <summary>
@@ -86,88 +80,19 @@ public class ImageCapture : MonoBehaviour {
             }
         }
 
-        // Subscribing to the Hololens API gesture recognizer to track user gestures
-        recognizer = new GestureRecognizer();
-        recognizer.SetRecognizableGestures(GestureSettings.Tap);
-        recognizer.Tapped += TapHandler;
-        recognizer.StartCapturingGestures();
-
         SceneOrganiser.Instance.SetCameraStatus("Ready");
-        AudioPlay.Instance.Play("Piano");
-    }
-
-    /// <summary>
-    /// Respond to Tap Input.
-    /// </summary>
-    private void TapHandler(TappedEventArgs obj)
-    {
-        AudioPlay.Instance.Play("Button_Press");
-        switch (AppMode)
-        {
-            case AppModes.Analysis:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to looping capture.
-                    SceneOrganiser.Instance.SetCameraStatus("Looping Capture");
-
-                    // Begin the capture loop
-                    InvokeRepeating("ExecuteImageCaptureAndAnalysis", 0, secondsBetweenCaptures);
-                }
-                else
-                {
-                    // The user tapped while the app was analyzing 
-                    // therefore stop the analysis process
-                    ResetImageCapture();
-                }
-                break;
-
-            case AppModes.Training:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Call the image capture
-                    ExecuteImageCaptureAndAnalysis();
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to uploading image.
-                    SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
-                }
-                break;
-
-            case AppModes.Smart:
-                if (!captureIsActive)
-                {
-                    captureIsActive = true;
-
-                    // Set the cursor color to red
-                    SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.red;
-
-                    // Update camera status to looping capture.
-                    //SceneOrganiser.Instance.SetCameraStatus("Looping Capture");
-
-                    // Begin the capture loop
-                    //InvokeRepeating("ExecuteImageCaptureAnalysisAndUpload", 0, secondsBetweenCaptures);
-                    ExecuteImageCaptureAndAnalysis();
-                }
-                break;
-        }
     }
 
     /// <summary>
     /// Begin process of Image Capturing and send To Azure Custom Vision Service.
     /// </summary>
-    private void ExecuteImageCaptureAndAnalysis()
+    public void ExecuteImageCaptureAndAnalysis()
     {
         // Update camera status to analysis.
         SceneOrganiser.Instance.SetCameraStatus("Analysis");
+
+        //Change cursor animation to Loading status
+        CursorManager.Instance.LoadingStart();
 
         // Create a label in world space using the SceneOrganiser class 
         // Invisible at this point but correctly positioned where the image was taken
@@ -274,13 +199,16 @@ public class ImageCapture : MonoBehaviour {
         captureIsActive = false;
 
         //Disable the Training Text
-        CustomVisionTrainer.Instance.EnableTextDisplay(false);
+        //CustomVisionTrainer.Instance.EnableTextDisplay(false);
 
-        // Set the cursor color to green
-        SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.green;
+        // Set the cursor to Normal state (Idle)
+        CursorManager.Instance.LoadingStop();
 
         // Update camera status to ready.
         SceneOrganiser.Instance.SetCameraStatus("Ready");
+
+        //Make a sound to notify the user
+        AudioPlay.Instance.Play("Bell");
 
         // Stop the capture loop if active
         CancelInvoke();

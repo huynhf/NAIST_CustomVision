@@ -56,7 +56,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// </summary>
     private void Start()
     {
-        trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
+        //trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
 
         GetTagsFromCloud();
     }
@@ -69,7 +69,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     internal void RequestTagSelection()
     {
         EnableTextDisplay(true);
-        trainingUI_TextMesh.text = $" \nUse voice command \nto choose between the following tags: \nMouse\nKeyboard \nor say Discard";
+        trainingUI_TextMesh.text = $" \nUse voice command \nto choose between the following actions: \nAdd object \nor say Discard";
 
         VoiceRecognizer.Instance.keywordRecognizer.Start();
     }
@@ -317,5 +317,13 @@ public class CustomVisionTrainer : MonoBehaviour {
         FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
         BinaryReader binaryReader = new BinaryReader(fileStream);
         return binaryReader.ReadBytes((int)fileStream.Length);
+    }
+
+    /// <summary>
+    /// Add a new object tag in the list of objects to recognize
+    /// </summary>
+    public void AddNewObject()
+    {
+
     }
 }
