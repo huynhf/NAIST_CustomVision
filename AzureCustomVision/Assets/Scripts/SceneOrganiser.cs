@@ -30,7 +30,7 @@ public class SceneOrganiser : MonoBehaviour {
     /// <summary>
     /// Reference to the last label positioned
     /// </summary>
-    internal TextMeshPro lastLabelPlaced = null;
+    public TextMeshPro lastLabelPlaced = null;
 
     /// <summary>
     /// Current threshold accepted for displaying the label
@@ -71,7 +71,7 @@ public class SceneOrganiser : MonoBehaviour {
 
     void Start()
     {
-        AudioPlay.Instance.Play("Piano");
+        
     }
 
     void Update()
@@ -173,6 +173,9 @@ public class SceneOrganiser : MonoBehaviour {
 
             if (recognizedObjects == 0)
                 lastLabelPlaced.text = "Unknown";
+
+            //Make a sound to notify the user of the new label
+            AudioPlay.Instance.PlayWithVolume("Bell", 80);
 
             if (ImageCapture.Instance.AppMode == ImageCapture.AppModes.Smart)
             {

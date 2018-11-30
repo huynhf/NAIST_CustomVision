@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraStatusIndicator: {fileID: 948075572}
+  lastLabelPlaced: {fileID: 0}
 --- !u!1 &879072915
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,9 +829,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 58661d4d73f874544881ab2b1b3506e2, type: 3}
-  - {fileID: 8300000, guid: 362f64f1b5a82f84e88ec33148937a64, type: 3}
   - {fileID: 8300000, guid: 55511520c1a64d7459f80a3c24fad6fc, type: 3}
+  - {fileID: 8300000, guid: 362f64f1b5a82f84e88ec33148937a64, type: 3}
+  - {fileID: 8300000, guid: 5159b8a4ceb64b740a0759b8e8283890, type: 3}
+  - {fileID: 8300000, guid: af983d5d9eda0964399c722e4907ad7e, type: 3}
 --- !u!4 &932345453
 Transform:
   m_ObjectHideFlags: 0
@@ -1088,7 +1090,7 @@ Prefab:
     - target: {fileID: 114000011154029958, guid: 2ed75ffdf9031c94e8bce4b3d17b9928,
         type: 2}
       propertyPath: drawVisualMeshes
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000012149591842, guid: 2ed75ffdf9031c94e8bce4b3d17b9928,
         type: 2}

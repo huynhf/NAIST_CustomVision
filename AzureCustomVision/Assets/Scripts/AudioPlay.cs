@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class AudioPlay : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class AudioPlay : MonoBehaviour
         aSrc.dopplerLevel = 0.0f;
         aSrc.rolloffMode = AudioRolloffMode.Logarithmic;
         aSrc.maxDistance = 20f;
+
+        //AudioPlay.Instance.Play("Piano");
     }
 
     public void Play(string audioName)
@@ -50,5 +53,16 @@ public class AudioPlay : MonoBehaviour
             //if we arrive here, no audio corresponds to the specified name
             Debug.Log("Audio clip loading Failed\n");
         }            
+    }
+
+    public void PlayWithVolume(string audioName, int pourcentage)
+    {
+        if (Enumerable.Range(1, 100).Contains(pourcentage))
+        {
+            aSrc.volume = pourcentage / 100f;
+            Play(audioName);
+        }
+        else
+            Play(audioName);
     }
 }

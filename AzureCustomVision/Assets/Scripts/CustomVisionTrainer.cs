@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -41,7 +42,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// <summary>
     /// The UI displaying the training Chapters
     /// </summary>
-    private TextMesh trainingUI_TextMesh;
+    private TextMeshPro trainingUI_TextMesh; 
 
     /// <summary>
     /// Called on initialization
@@ -56,14 +57,33 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// </summary>
     private void Start()
     {
-        //trainingUI_TextMesh = SceneOrganiser.Instance.CreateTrainingUI("TrainingUI", 0.04f, 0, 4, false);
-
-        GetTagsFromCloud();
+        StartCoroutine(GetTagsFromCloud());
     }
 
-    internal void EnableTextDisplay(bool state)
+    internal void EnableTextDisplay(bool state) 
     {
-        trainingUI_TextMesh.gameObject.SetActive(state);
+        if (state == true)
+        {
+            //Create a new label just above the analysis label
+            Vector3 lastLabelPosition = SceneOrganiser.Instance.lastLabelPlaced.transform.position;
+            Quaternion lastLabelRotation = SceneOrganiser.Instance.lastLabelPlaced.transform.rotation;
+            SceneOrganiser.Instance.PlaceAnalysisLabel();
+            trainingUI_TextMesh = SceneOrganiser.Instance.lastLabelPlaced;
+            trainingUI_TextMesh.transform.position = lastLabelPosition;
+            trainingUI_TextMesh.transform.Translate(Vector3.up * 0.2f, Space.World);
+            trainingUI_TextMesh.transform.rotation = lastLabelRotation; // Quaternion.LookRotation(Camera.main.transform.forward);
+
+            trainingUI_TextMesh.text = "test";
+            //trainingUI_TextMesh.gameObject.SetActive(state);
+        }
+        else
+        {
+            trainingUI_TextMesh.text = string.Empty;
+            trainingUI_TextMesh = null; //break reference with lastLabelPlaced of SceneOrganiser
+
+            AudioPlay.Instance.PlayWithVolume("Bubble-3", 20); //make a sound to notify the disparition of the label
+        }
+
     }
 
     internal void RequestTagSelection()
@@ -303,8 +323,9 @@ public class CustomVisionTrainer : MonoBehaviour {
             yield return new WaitForSeconds(2);
             trainingUI_TextMesh.text = "Ready for next \ncapture";
 
+            //Reset UI for next capture
             yield return new WaitForSeconds(2);
-            trainingUI_TextMesh.text = "";
+            EnableTextDisplay(false); 
             ImageCapture.Instance.ResetImageCapture();
         }
     }

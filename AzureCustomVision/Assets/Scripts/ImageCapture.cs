@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.XR.WSA.WebCam;
+using TMPro;
 
 public class ImageCapture : MonoBehaviour {
 
@@ -57,7 +58,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Analysis;
+        AppMode = AppModes.Smart;
     }
 
     /// <summary>
@@ -175,13 +176,13 @@ public class ImageCapture : MonoBehaviour {
             SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
 
             // Call training using captured image
-            if(tag == "More than one")
+            if(tag == "More than one" || tag == null)
             {
                 //Reset scene
                 ResetImageCapture();
             }
-            else if (tag == null)
-                CustomVisionTrainer.Instance.RequestTagSelection();
+            //else if (tag == null)
+            //    CustomVisionTrainer.Instance.RequestTagSelection();
             else
             {
                 //Upload photo with recognized tag
@@ -206,9 +207,6 @@ public class ImageCapture : MonoBehaviour {
 
         // Update camera status to ready.
         SceneOrganiser.Instance.SetCameraStatus("Ready");
-
-        //Make a sound to notify the user
-        AudioPlay.Instance.Play("Bell");
 
         // Stop the capture loop if active
         CancelInvoke();
