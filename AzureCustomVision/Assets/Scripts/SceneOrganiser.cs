@@ -1,5 +1,11 @@
-﻿using UnityEngine;
+﻿#define OBJDETECT
+
+using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System.Linq;
+using HoloToolkit.Unity.SpatialMapping;
+using System;
 
 public class SceneOrganiser : MonoBehaviour {
 
@@ -20,6 +26,9 @@ public class SceneOrganiser : MonoBehaviour {
     [SerializeField]
     internal TextMeshPro cameraStatusIndicator;
 
+    [SerializeField]
+    internal SpatialMappingManager SpatialMapping;
+
     /// <summary>
     /// Name of the recognized object /!\ Only in AppModes.Smart mode
     /// </summary>
@@ -37,6 +46,20 @@ public class SceneOrganiser : MonoBehaviour {
     /// Reduce this value to display the recognition more often
     /// </summary>
     internal float probabilityThreshold = 0.5f;
+
+#if OBJDETECT
+
+    /// <summary>
+    /// The quad object hosting the imposed image captured
+    /// </summary>
+    private GameObject quad;
+
+    /// <summary>
+    /// Renderer of the quad object
+    /// </summary>
+    internal Renderer quadRenderer;
+
+#endif
 
     /// <summary>
     /// Called on initialization
@@ -63,7 +86,6 @@ public class SceneOrganiser : MonoBehaviour {
 
         // Create the camera status indicator label, and place it above where predictions
         // and training UI will appear.
-        
 
         // Set camera status indicator to loading.
         SetCameraStatus("Loading");
@@ -142,18 +164,96 @@ public class SceneOrganiser : MonoBehaviour {
             label.transform.Translate(Vector3.back * 0.1f, Space.World);
             label.transform.Translate(Vector3.up * 0.1f, Space.World);
             label.transform.rotation = Quaternion.LookRotation(gazeDirection);// * Quaternion.Euler(0, 90, 0);
-            //label.text = label.transform.position.ToString(); //Uncomment only to know position while testing
-
+#if OBJDETECT
+            label.text = hitInfo.distance.ToString(); // label.transform.position.ToString(); //Uncomment only to know position while testing
+#endif
             lastLabelPlaced = label;
         }
+
+#if OBJDETECT
+        // Create a GameObject to which the texture can be applied
+        quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        quadRenderer = quad.GetComponent<Renderer>() as Renderer;
+        Material m = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse")); 
+        quadRenderer.material = m;
+
+        // Here you can set the transparency of the quad. Useful for debugging
+        // Allows you to see the picture taken in the real world
+        float transparency = 0.5f;
+        quadRenderer.material.color = new Color(1, 1, 1, transparency);
+
+        //Set the position and scale of the quad depending on user position
+        quad.transform.SetParent(transform);
+        //quad.transform.rotation = transform.rotation;
+
+        //Set the quad (screen for picture) at the label position
+        quad.transform.position = CursorManager.Instance.GetCursorPositionOnMesh();
+        quad.transform.rotation = Quaternion.LookRotation(gazeDirection);
+
+        //The quad is positioned slightly forward in font of the user
+        //quad.transform.localPosition = new Vector3(0.0f, 0.0f, 3.0f);
+
+        // The quad scale as been set with the following value following experimentation,  
+        // to allow the image on the quad to be as precisely imposed to the real world as possible
+        quad.transform.localScale = new Vector3(3f/2.5f*hitInfo.distance, 1.65f/2.5f*hitInfo.distance, 1f); //3f and 1.65f
+
+        quad.transform.parent = null;
+#endif
+        
     }
 
     /// <summary>
     /// Set the Tags as Text of the last label created. 
     /// </summary>
-    public void SetTagsToLastLabel(AnalysisObject analysisObject)
+    public void FinaliseLabel(AnalysisObject analysisObject)
     {
-        //lastLabelPlaced = lastLabelPlaced.GetComponent<TextMeshPro>();
+#if OBJDETECT
+        if (analysisObject.predictions != null)
+        {
+            // Sort the predictions to locate the highest one
+            List<Prediction> sortedPredictions = new List<Prediction>();
+            sortedPredictions = analysisObject.predictions.OrderBy(p => p.probability).ToList();
+            Prediction bestPrediction = new Prediction();
+            bestPrediction = sortedPredictions[sortedPredictions.Count - 1];
+
+            if (bestPrediction.probability > probabilityThreshold)
+            {
+                quadRenderer = quad.GetComponent<Renderer>() as Renderer;
+                Bounds quadBounds = quadRenderer.bounds;
+
+                // Position the label as close as possible to the Bounding Box of the prediction 
+                // At this point it will not consider depth
+                lastLabelPlaced.transform.parent = quad.transform;
+                lastLabelPlaced.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.boundingBox);
+
+                //Draw a visible boundingBox of the quad
+                GameObject quadBoundingBox = DrawInSpace.Instance.DrawRectangle(quad.transform, 
+                    (float)bestPrediction.boundingBox.width, (float)bestPrediction.boundingBox.height);
+                DrawInSpace.Instance.ChooseMaterial(quadBoundingBox, "BoundingBoxTransparent");
+                //Set the position and scale of the quad depending on user position
+                quadBoundingBox.transform.SetParent(transform);
+
+                // Set the tag text
+                lastLabelPlaced.text = bestPrediction.tagName;
+
+                //Cast a ray from the user's head to the currently placed label, it should hit the object detected by the Service.
+                // At that point it will reposition the label where the ray HL sensor collides with the object,
+                // (using the HL spatial tracking)
+                Debug.Log("Repositioning Label");
+                Vector3 headPosition = Camera.main.transform.position;
+                RaycastHit objHitInfo;
+                Vector3 objDirection = lastLabelPlaced.transform.position;
+                if (Physics.Raycast(headPosition, objDirection, out objHitInfo, 30.0f, SpatialMapping.LayerMask))
+                {
+                    lastLabelPlaced.transform.position = objHitInfo.point;
+                }
+            }
+        }
+
+        // Stop the analysis process
+        ImageCapture.Instance.ResetImageCapture();
+
+#else
 
         if (analysisObject.Predictions != null && lastLabelPlaced != null)
         {
@@ -191,9 +291,53 @@ public class SceneOrganiser : MonoBehaviour {
                 ImageCapture.Instance.ResetImageCapture();
             }
         }
+#endif
         
     }
 
+    private void CreateCube(Vector3 position)
+    {
+        var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.position = position;
+        //Create a material with transparent diffuse shader
+        Material material = new Material(Shader.Find("Transparent/Diffuse"));
+        material.color = Color.gray;
+        // assign the material to the renderer
+        cube.GetComponent<Renderer>().material = material;
+    }
+
+#if OBJDETECT
+
+    /// <summary>
+    /// This method hosts a series of calculations to determine the position 
+    /// of the Bounding Box on the quad created in the real world
+    /// by using the Bounding Box received back alongside the Best Prediction
+    /// </summary>
+    public Vector3 CalculateBoundingBoxPosition(Bounds b, BoundingBox2D boundingBox)
+    {
+        Debug.Log($"BB: left {boundingBox.left}, top {boundingBox.top}, width {boundingBox.width}, height {boundingBox.height}");
+
+        double centerFromLeft = boundingBox.left + (boundingBox.width / 2);
+        double centerFromTop = boundingBox.top + (boundingBox.height / 2);
+        Debug.Log($"BB CenterFromLeft {centerFromLeft}, CenterFromTop {centerFromTop}");
+
+        double quadWidth = b.size.normalized.x;
+        double quadHeight = b.size.normalized.y;
+        Debug.Log($"Quad Width {b.size.normalized.x}, Quad Height {b.size.normalized.y}");
+
+        double normalisedPos_X = (quadWidth * centerFromLeft) - (quadWidth / 2);
+        double normalisedPos_Y = (quadHeight * centerFromTop) - (quadHeight / 2);
+
+        return new Vector3((float)normalisedPos_X, (float)normalisedPos_Y, 0);
+    }
+
+    //public DrawRectangle()
+    //{
+    //    Graphics G = new Graphics();
+    //    System.Drawing.Pen pen = new Pen(Color.red, 2);
+    //}
+
+#endif
     /// <summary>
     /// Create a 3D Text Mesh in scene, with various parameters.
     /// </summary>

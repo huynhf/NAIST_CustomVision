@@ -27,7 +27,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// <summary>
     /// Insert your Project Id here
     /// </summary>
-    private string projectId = "9bf24545-ae53-44bb-85fc-e3afeffa36e9";
+    private string projectId;
 
     /// <summary>
     /// Byte array of the image to submit for analysis
@@ -50,6 +50,15 @@ public class CustomVisionTrainer : MonoBehaviour {
     private void Awake()
     {
         Instance = this;
+
+        if(CustomVisionObjects.mode == CustomVisionObjects.Modes.Classification)
+        {
+            projectId = "9bf24545-ae53-44bb-85fc-e3afeffa36e9";
+        }
+        else
+        {
+            projectId = "1f2ce23d-d05f-46b6-9592-5441df2c3991";
+        }
     }
 
     /// <summary>

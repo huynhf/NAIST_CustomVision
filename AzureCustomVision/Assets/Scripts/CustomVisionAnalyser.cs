@@ -19,7 +19,7 @@ public class CustomVisionAnalyser : MonoBehaviour {
     /// <summary>
     /// Insert your prediction endpoint here
     /// </summary>
-    private string predictionEndpoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/9bf24545-ae53-44bb-85fc-e3afeffa36e9/image";
+    private string predictionEndpoint;
 
     /// <summary>
     /// Byte array of the image to submit for analysis
@@ -33,6 +33,15 @@ public class CustomVisionAnalyser : MonoBehaviour {
     {
         // Allows this instance to behave like a singleton
         Instance = this;
+
+        if (CustomVisionObjects.mode == CustomVisionObjects.Modes.Classification)
+        {
+            predictionEndpoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/9bf24545-ae53-44bb-85fc-e3afeffa36e9/image";
+        }
+        else
+        {
+            predictionEndpoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/1f2ce23d-d05f-46b6-9592-5441df2c3991/image";
+        }
     }
 
     /// <summary>
@@ -61,14 +70,22 @@ public class CustomVisionAnalyser : MonoBehaviour {
 
             string jsonResponse = unityWebRequest.downloadHandler.text;
 
-            // The response will be in JSON format, therefore it needs to be deserialized    
-            DialogManager.Instance.LaunchDialog(HoloToolkit.UX.Dialog.DialogButtonType.OK, "Json", jsonResponse);
-            // The following lines refers to a class that you will build in later Chapters
-            // Wait until then to uncomment these lines
+            Debug.Log("response: " + jsonResponse);
 
+            if(CustomVisionObjects.mode == CustomVisionObjects.Modes.ObjDetection)
+            {
+                // Create a texture. Texture size does not matter, since
+                // LoadImage will replace with the incoming image size.
+                Texture2D tex = new Texture2D(1, 1);
+                tex.LoadImage(imageBytes);
+                SceneOrganiser.Instance.quadRenderer.material.SetTexture("_MainTex", tex);
+            }
+
+            // The response will be in JSON format, therefore it needs to be deserialized  
             AnalysisObject analysisObject = new AnalysisObject();
             analysisObject = JsonConvert.DeserializeObject<AnalysisObject>(jsonResponse);
-            SceneOrganiser.Instance.SetTagsToLastLabel(analysisObject);
+
+            SceneOrganiser.Instance.FinaliseLabel(analysisObject);
         }
     }
 

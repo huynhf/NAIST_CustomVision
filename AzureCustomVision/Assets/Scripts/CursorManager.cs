@@ -10,15 +10,19 @@ public class CursorManager : MonoBehaviour {
     public static CursorManager Instance;
 
     [SerializeField]
-    private Cursor cursorPrefab;
+    private Cursor cursor;
 
-    [SerializeField]
     private Animator cursorAnim;
     private int waitingHash = Animator.StringToHash("Waiting");
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        cursorAnim = cursor.GetComponentInChildren<Animator>();
     }
 
     public void LoadingStart()
@@ -31,8 +35,22 @@ public class CursorManager : MonoBehaviour {
         cursorAnim.SetBool(waitingHash, false);
     }
 
-    public Vector3 GetCursorPosition()
+    public Vector3 GetCursorPositionOnMesh()
     {
-        return cursorPrefab.Position;
+        var headPosition = Camera.main.transform.position;
+        var gazeDirection = Camera.main.transform.forward;
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
+        {
+            // If the raycast hit a hologram, use that as the focused object.
+            return hitInfo.point;
+        }
+        else
+        {
+            Debug.Log("No mesh hit\n");
+            DialogManager.Instance.LaunchBasicDialog(1, "Debug", "No mesh hit by the cursor");
+            return new Vector3(0,0,0);
+        }
     }
 }

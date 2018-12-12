@@ -58,7 +58,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Smart;
+        AppMode = AppModes.Analysis;
     }
 
     /// <summary>

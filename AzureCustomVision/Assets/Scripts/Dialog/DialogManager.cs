@@ -13,31 +13,33 @@ public class DialogManager : MonoBehaviour {
     [SerializeField]
     private bool isDialogLaunched;
 
-    //[SerializeField]
-    //private GameObject resultText;
-    ///// <summary>
-    ///// Used to report the dialogResult. OK, Cancel etc.
-    ///// The button that was clicked to respond to the Dialog.
-    ///// </summary>
-    //public GameObject ResultText 
-    //{
-    //    get
-    //    {
-    //        return resultText;
-    //    }
+    [SerializeField]
+    public GameObject resultText;
+    /// <summary>
+    /// Used to report the dialogResult. OK, Cancel etc.
+    /// The button that was clicked to respond to the Dialog.
+    /// </summary>
+    public GameObject ResultText
+    {
+        get
+        {
+            return resultText;
+        }
 
-    //    set
-    //    {
-    //        resultText = value;
-    //    }
-    //}
+        set
+        {
+            resultText = value;
+        }
+    }
 
     [SerializeField]
     [Range(0, 2)]
     private int numButtons = 1;
 
-    //private TextMesh resultTextMesh;
-    //private Button button;
+    private TextMesh resultTextMesh;
+
+    // Dialog button that will be clicked by user
+    private Button button;
 
     private void Awake()
     {
@@ -78,15 +80,16 @@ public class DialogManager : MonoBehaviour {
 
     private void OnEnable()
     {
-        //resultTextMesh = ResultText.GetComponent<TextMesh>();
-        //button = GetComponent<Button>();
-        //if (button != null)
-        //{
-        //    button.OnButtonClicked += OnButtonClicked;
-        //}
+        resultTextMesh = ResultText.GetComponent<TextMesh>();
+        //resultTextMesh = new TextMesh();
+        button = GetComponent<Button>();
+        if (button != null)
+        {
+            button.OnButtonClicked += OnButtonClicked;
+        }
     }
 
-    public void launchDialog(int nbButtons)
+    public void LaunchBasicDialog(int nbButtons, string title, string message)
     {
         if (nbButtons != 0)
             numButtons = nbButtons;
@@ -96,19 +99,20 @@ public class DialogManager : MonoBehaviour {
             if (numButtons == 1)
             {
                 // Launch Dialog with single button
-                StartCoroutine(LaunchDialog(DialogButtonType.OK, "Single Button Dialog", "Dialogs and flyouts are transient UI elements that appear when something happens that requires notification, approval, or additional information from the user."));
+                StartCoroutine(LaunchDialog(DialogButtonType.OK, title, message));
             }
             else if (numButtons == 2)
             {
                 // Launch Dialog with two buttons
-                StartCoroutine(LaunchDialog(DialogButtonType.Yes | DialogButtonType.No, "Two Buttons Dialog", "Dialogs and flyouts are transient UI elements that appear when something happens that requires notification, approval, or additional information from the user."));
+                StartCoroutine(LaunchDialog(DialogButtonType.Yes | DialogButtonType.No, title, message));
             }
         }
     }
-    //private void OnButtonClicked(GameObject obj)
-    //{
-    //    launchDialog(0);
-    //}
+
+    private void OnButtonClicked(GameObject obj)
+    {
+        //Do nothing
+    }
 
     /// <summary>
     /// Event Handler that fires when Dialog is closed- when a button on the Dialog is clicked.
@@ -117,8 +121,8 @@ public class DialogManager : MonoBehaviour {
     protected void OnClosed(DialogResult result)
     {
         // Get the result text from the Dialog
-        //resultTextMesh.text = result.Result.ToString();
-        CursorManager.Instance.LoadingStop();
+        resultTextMesh.text = result.Result.ToString();
+        //CursorManager.Instance.LoadingStop();
     }
 }
 

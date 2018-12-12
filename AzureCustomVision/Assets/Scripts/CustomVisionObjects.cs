@@ -1,11 +1,18 @@
-﻿using System;
+﻿#define OBJDETECT
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class CustomVisionObjects : MonoBehaviour {
 
-	
+    /// <summary>
+    /// Custom Vision Modes for choosing between Classification or Object detection
+    /// </summary>
+    public enum Modes { Classification, ObjDetection }
+
+    static public Modes mode = Modes.ObjDetection;
 }
 
 // The objects contained in this script represent the deserialized version
@@ -104,6 +111,40 @@ public class Iteration
     public string DomainId { get; set; }
 }
 
+#if OBJDETECT
+
+/// <summary>
+/// Predictions received by the Service
+/// after submitting an image for analysis
+/// Includes Bounding Box
+/// </summary>
+public class AnalysisObject //Initially called AnalysisRootObject
+{
+    public string id { get; set; }
+    public string project { get; set; }
+    public string iteration { get; set; }
+    public DateTime created { get; set; }
+    public List<Prediction> predictions { get; set; }
+}
+
+public class BoundingBox2D
+{
+    public double left { get; set; }
+    public double top { get; set; }
+    public double width { get; set; }
+    public double height { get; set; }
+}
+
+public class Prediction
+{
+    public double probability { get; set; }
+    public string tagId { get; set; }
+    public string tagName { get; set; }
+    public BoundingBox2D boundingBox { get; set; }
+}
+
+#else
+
 /// <summary>
 /// Predictions received by the Service after submitting an image for analysis
 /// </summary> 
@@ -119,3 +160,5 @@ public class Prediction
     public string TagName { get; set; }
     public double Probability { get; set; }
 }
+
+#endif

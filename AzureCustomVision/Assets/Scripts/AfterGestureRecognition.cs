@@ -21,13 +21,13 @@ public class AfterGestureRecognition : MonoBehaviour {
     /// </summary>
     public void ExtraTapped()
     {
-        //DialogManager.Instance.launchDialog(1);
+        //Vector3 cursorPosition = CursorManager.Instance.GetCursorPositionOnMesh();
+        
     }
 
     public void ExtraHoldStarted()
     {
         //StartCoroutine(Wait(2f));
-        //DialogManager.Instance.launchDialog(1);
         //AudioPlay.Instance.Play("Bell");
         ImageCapture.Instance.ExecuteImageCaptureAndAnalysis();
     }
