@@ -628,6 +628,8 @@ MonoBehaviour:
   cameraStatusIndicator: {fileID: 948075572}
   SpatialMapping: {fileID: 968987194}
   lastLabelPlaced: {fileID: 0}
+  resizableQuadPrefab: {fileID: 1729816923108204, guid: 90c318af1e80f5d449cdb187467c7ec5,
+    type: 2}
 --- !u!1 &770690375
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f850296f971a0468e551ad6ec6c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuadPrefab: {fileID: 1252601114768784, guid: 374cf53bf09b94549b16466722455134, type: 2}
+  resizableQuadPrefab: {fileID: 1729816923108204, guid: 90c318af1e80f5d449cdb187467c7ec5,
+    type: 2}
   materials:
   - {fileID: 2100000, guid: 9028a3f41c7a0a64995e1b8aa76d70c5, type: 2}
 --- !u!1001 &891310421

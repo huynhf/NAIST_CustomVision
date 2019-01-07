@@ -22,7 +22,8 @@ public class AfterGestureRecognition : MonoBehaviour {
     public void ExtraTapped()
     {
         //Vector3 cursorPosition = CursorManager.Instance.GetCursorPositionOnMesh();
-        
+        //Debug.Log($"Cursor position = {cursorPosition}");
+        //DrawInSpace.Instance.DrawStaticRectangle(CursorManager.Instance.GetCursorPositionOnMesh(), 0.1f, 0.1f);
     }
 
     public void ExtraHoldStarted()

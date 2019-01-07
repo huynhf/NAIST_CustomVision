@@ -7,7 +7,7 @@ public class TestDrawRectangle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        quad = DrawInSpace.Instance.DrawRectangle(transform, 0.2f, 0.3f);
+        quad = DrawInSpace.Instance.DrawStaticRectangle(transform.position, 0.2f, 0.3f);
         //DrawInSpace.Instance.ChooseMaterial(quad, "BoundingBoxTransparent");
         DrawInSpace.Instance.ChooseMaterial(quad, "BoundingBoxLines");
 

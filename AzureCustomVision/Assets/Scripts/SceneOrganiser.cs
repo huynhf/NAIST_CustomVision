@@ -48,7 +48,7 @@ public class SceneOrganiser : MonoBehaviour {
     internal float probabilityThreshold = 0.5f;
 
 #if OBJDETECT
-
+    
     /// <summary>
     /// The quad object hosting the imposed image captured
     /// </summary>
@@ -179,7 +179,7 @@ public class SceneOrganiser : MonoBehaviour {
 
         // Here you can set the transparency of the quad. Useful for debugging
         // Allows you to see the picture taken in the real world
-        float transparency = 0.5f;
+        float transparency = 0.0f;
         quadRenderer.material.color = new Color(1, 1, 1, transparency);
 
         //Set the position and scale of the quad depending on user position
@@ -195,7 +195,7 @@ public class SceneOrganiser : MonoBehaviour {
 
         // The quad scale as been set with the following value following experimentation,  
         // to allow the image on the quad to be as precisely imposed to the real world as possible
-        quad.transform.localScale = new Vector3(3f/2.5f*hitInfo.distance, 1.65f/2.5f*hitInfo.distance, 1f); //3f and 1.65f
+        quad.transform.localScale = new Vector3(hitInfo.distance, 1.65f / 3f * hitInfo.distance, 1f); //3f/2.5f and 1.65f/2.5f*hitInfo.distance
 
         quad.transform.parent = null;
 #endif
@@ -225,10 +225,14 @@ public class SceneOrganiser : MonoBehaviour {
                 // At this point it will not consider depth
                 lastLabelPlaced.transform.parent = quad.transform;
                 lastLabelPlaced.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.boundingBox);
+                //We add this to put the label at the same depth z that the quad
+                lastLabelPlaced.transform.position.Set(lastLabelPlaced.transform.position.x,
+                    lastLabelPlaced.transform.position.y, quad.transform.position.z);
 
                 //Draw a visible boundingBox of the quad
-                GameObject quadBoundingBox = DrawInSpace.Instance.DrawRectangle(quad.transform, 
+                GameObject quadBoundingBox = DrawInSpace.Instance.DrawStaticRectangle(lastLabelPlaced.transform.position,
                     (float)bestPrediction.boundingBox.width, (float)bestPrediction.boundingBox.height);
+                quadBoundingBox.transform.rotation = quad.transform.rotation;
                 DrawInSpace.Instance.ChooseMaterial(quadBoundingBox, "BoundingBoxTransparent");
                 //Set the position and scale of the quad depending on user position
                 quadBoundingBox.transform.SetParent(transform);
@@ -248,7 +252,12 @@ public class SceneOrganiser : MonoBehaviour {
                     lastLabelPlaced.transform.position = objHitInfo.point;
                 }
             }
+            else
+            {
+                lastLabelPlaced.text = "Unknown";
+            }
         }
+        
 
         // Stop the analysis process
         ImageCapture.Instance.ResetImageCapture();
@@ -331,7 +340,7 @@ public class SceneOrganiser : MonoBehaviour {
         return new Vector3((float)normalisedPos_X, (float)normalisedPos_Y, 0);
     }
 
-    //public DrawRectangle()
+    //public DrawStaticRectangle()
     //{
     //    Graphics G = new Graphics();
     //    System.Drawing.Pen pen = new Pen(Color.red, 2);

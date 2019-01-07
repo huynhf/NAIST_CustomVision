@@ -51,7 +51,7 @@ public class CustomVisionAnalyser : MonoBehaviour {
     {
         WWWForm webForm = new WWWForm();
         using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(predictionEndpoint, webForm))
-        {
+        {            
             // Gets a byte array out of the saved image
             imageBytes = GetImageAsByteArray(imagePath);
 
