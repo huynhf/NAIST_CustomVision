@@ -15,7 +15,7 @@ namespace HoloToolkit.Unity.UX
         [Header("Flattening")]
         [SerializeField]
         [Tooltip("Choose this option if Rig is to be applied to a 2D object.")]
-        private BoundingBox.FlattenModeEnum flattenedAxis = default(BoundingBox.FlattenModeEnum);
+        public BoundingBox.FlattenModeEnum flattenedAxis = default(BoundingBox.FlattenModeEnum); //shouldn't be public, dirty code
 
         [Header("Customization Settings")]
         [SerializeField]
@@ -42,7 +42,7 @@ namespace HoloToolkit.Unity.UX
         private BoundingBoxGizmoHandleRotationType rotationType = BoundingBoxGizmoHandleRotationType.objectCoordinates;
 
         [SerializeField]
-        private BoundingBoxGizmoHandleHandMotionType handMotionToRotate = BoundingBoxGizmoHandleHandMotionType.handRotatesToRotateObject;
+        private BoundingBoxGizmoHandleHandMotionType handMotionToRotate = BoundingBoxGizmoHandleHandMotionType.handMovesToRotateObject;
 
         [SerializeField]
         private bool rotateAroundPivot = false;
@@ -92,6 +92,19 @@ namespace HoloToolkit.Unity.UX
             set
             {
                 boundingBoxPrefab = value;
+            }
+        }
+
+        public AppBar AppBarPrefab
+        {
+            get
+            {
+                return appBarPrefab;
+            }
+
+            set
+            {
+                appBarPrefab = value;
             }
         }
 

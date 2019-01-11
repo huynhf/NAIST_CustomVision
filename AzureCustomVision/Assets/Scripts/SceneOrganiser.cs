@@ -179,7 +179,7 @@ public class SceneOrganiser : MonoBehaviour {
 
         // Here you can set the transparency of the quad. Useful for debugging
         // Allows you to see the picture taken in the real world
-        float transparency = 0.0f;
+        float transparency = 0.5f;
         quadRenderer.material.color = new Color(1, 1, 1, transparency);
 
         //Set the position and scale of the quad depending on user position
@@ -196,6 +196,8 @@ public class SceneOrganiser : MonoBehaviour {
         // The quad scale as been set with the following value following experimentation,  
         // to allow the image on the quad to be as precisely imposed to the real world as possible
         quad.transform.localScale = new Vector3(hitInfo.distance, 1.65f / 3f * hitInfo.distance, 1f); //3f/2.5f and 1.65f/2.5f*hitInfo.distance
+
+        BoundingBoxManager.Instance.MakeBoundingBoxInteractible(quad, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
 
         quad.transform.parent = null;
 #endif
@@ -229,14 +231,18 @@ public class SceneOrganiser : MonoBehaviour {
                 lastLabelPlaced.transform.position.Set(lastLabelPlaced.transform.position.x,
                     lastLabelPlaced.transform.position.y, quad.transform.position.z);
 
-                //Draw a visible boundingBox of the quad
-                GameObject quadBoundingBox = DrawInSpace.Instance.DrawStaticRectangle(lastLabelPlaced.transform.position,
+                //Draw a visible boundingBox of the recognized object
+                Vector3 objPosition = new Vector3(lastLabelPlaced.transform.position.x + 0.1f,
+                    lastLabelPlaced.transform.position.y - 0.1f, lastLabelPlaced.transform.position.z);
+                GameObject objBoundingBox = DrawInSpace.Instance.DrawCube(objPosition,
                     (float)bestPrediction.boundingBox.width, (float)bestPrediction.boundingBox.height);
-                quadBoundingBox.transform.rotation = quad.transform.rotation;
-                DrawInSpace.Instance.ChooseMaterial(quadBoundingBox, "BoundingBoxTransparent");
+                //DrawInSpace.Instance.ChooseMaterial(objBoundingBox, "BoundingBoxTransparent"); //optional
                 //Set the position and scale of the quad depending on user position
-                quadBoundingBox.transform.SetParent(transform);
+                objBoundingBox.transform.SetParent(transform);
+                BoundingBoxManager.Instance.MakeBoundingBoxInteractible(objBoundingBox);
 
+                //Link the Text label to the object bounding box
+                lastLabelPlaced.transform.SetParent(objBoundingBox.transform);
                 // Set the tag text
                 lastLabelPlaced.text = bestPrediction.tagName;
 

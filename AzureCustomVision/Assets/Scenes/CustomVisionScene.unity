@@ -628,8 +628,6 @@ MonoBehaviour:
   cameraStatusIndicator: {fileID: 948075572}
   SpatialMapping: {fileID: 968987194}
   lastLabelPlaced: {fileID: 0}
-  resizableQuadPrefab: {fileID: 1729816923108204, guid: 90c318af1e80f5d449cdb187467c7ec5,
-    type: 2}
 --- !u!1 &770690375
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 770690376}
   - component: {fileID: 770690378}
+  - component: {fileID: 770690377}
   m_Layer: 0
   m_Name: DrawBoundingBox
   m_TagString: Untagged
@@ -659,13 +658,30 @@ Transform:
   m_Father: {fileID: 746409889}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &770690378
+--- !u!114 &770690377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 770690375}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4295d2af5d7683d408ffb105d76a8515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoundingBoxPrefab: {fileID: 114030465538688920, guid: 865a8ded6c47efd4285f04f3aebe99e9,
+    type: 2}
+  AppBarPrefab: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+    type: 2}
+  handle: {fileID: 2100000, guid: 4a9072a0d8623aa44abf31f02d209a09, type: 2}
+  handleGrabbed: {fileID: 2100000, guid: b614a09bc429623478e946d8170b15ae, type: 2}
+--- !u!114 &770690378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770690375}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92f850296f971a0468e551ad6ec6c5c4, type: 3}
   m_Name: 
