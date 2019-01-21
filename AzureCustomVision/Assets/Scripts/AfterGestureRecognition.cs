@@ -13,7 +13,7 @@ public class AfterGestureRecognition : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        
 	}
 
     /// <summary>

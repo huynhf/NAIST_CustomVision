@@ -120,27 +120,27 @@ public class Iteration
 /// </summary>
 public class AnalysisObject //Initially called AnalysisRootObject
 {
-    public string id { get; set; }
-    public string project { get; set; }
-    public string iteration { get; set; }
-    public DateTime created { get; set; }
-    public List<Prediction> predictions { get; set; }
+    public string Id { get; set; }
+    public string Project { get; set; }
+    public string Iteration { get; set; }
+    public DateTime Created { get; set; }
+    public List<Prediction> Predictions { get; set; }
 }
 
 public class BoundingBox2D
 {
-    public double left { get; set; }
-    public double top { get; set; }
-    public double width { get; set; }
-    public double height { get; set; }
+    public double Left { get; set; }
+    public double Top { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
 }
 
 public class Prediction
 {
-    public double probability { get; set; }
-    public string tagId { get; set; }
-    public string tagName { get; set; }
-    public BoundingBox2D boundingBox { get; set; }
+    public double Probability { get; set; }
+    public string TagId { get; set; }
+    public string TagName { get; set; }
+    public BoundingBox2D BoundingBox { get; set; }
 }
 
 #else

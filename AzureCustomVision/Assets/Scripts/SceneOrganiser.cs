@@ -45,7 +45,7 @@ public class SceneOrganiser : MonoBehaviour {
     /// Current threshold accepted for displaying the label
     /// Reduce this value to display the recognition more often
     /// </summary>
-    internal float probabilityThreshold = 0.5f;
+    internal float probabilityThreshold = 0.3f;
 
 #if OBJDETECT
     
@@ -84,7 +84,7 @@ public class SceneOrganiser : MonoBehaviour {
         // Add the CustomVisionObjects class to this GameObject
         gameObject.AddComponent<CustomVisionObjects>();
 
-        // Create the camera status indicator label, and place it above where predictions
+        // Create the camera status indicator label, and place it above where Predictions
         // and training UI will appear.
 
         // Set camera status indicator to loading.
@@ -109,32 +109,32 @@ public class SceneOrganiser : MonoBehaviour {
     {
         if (string.IsNullOrEmpty(statusText) == false)
         {
-            string message = "white";
+            string textColor = "white";
 
             switch (statusText.ToLower())
             {
                 case "loading":
-                    message = "yellow";
+                    textColor = "yellow";
                     break;
 
                 case "ready":
-                    message = "green";
+                    textColor = "green";
                     break;
 
                 case "uploading image":
-                    message = "red";
+                    textColor = "red";
                     break;
 
                 case "looping capture":
-                    message = "yellow";
+                    textColor = "yellow";
                     break;
 
                 case "analysis":
-                    message = "red";
+                    textColor = "red";
                     break;
             }
 
-            cameraStatusIndicator.GetComponent<TextMeshPro>().text = $"Camera Status:\n<color={message}>{statusText}..</color>";
+            cameraStatusIndicator.GetComponent<TextMeshPro>().text = $"Camera Status:\n<color={textColor}>{statusText}..</color>";
         }
     }
 
@@ -179,7 +179,7 @@ public class SceneOrganiser : MonoBehaviour {
 
         // Here you can set the transparency of the quad. Useful for debugging
         // Allows you to see the picture taken in the real world
-        float transparency = 0.5f;
+        float transparency = 0.0f;
         quadRenderer.material.color = new Color(1, 1, 1, transparency);
 
         //Set the position and scale of the quad depending on user position
@@ -197,7 +197,7 @@ public class SceneOrganiser : MonoBehaviour {
         // to allow the image on the quad to be as precisely imposed to the real world as possible
         quad.transform.localScale = new Vector3(hitInfo.distance, 1.65f / 3f * hitInfo.distance, 1f); //3f/2.5f and 1.65f/2.5f*hitInfo.distance
 
-        BoundingBoxManager.Instance.MakeBoundingBoxInteractible(quad, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
+        //BoundingBoxManager.Instance.MakeBoundingBoxInteractible(quad, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
 
         quad.transform.parent = null;
 #endif
@@ -210,41 +210,37 @@ public class SceneOrganiser : MonoBehaviour {
     public void FinaliseLabel(AnalysisObject analysisObject)
     {
 #if OBJDETECT
-        if (analysisObject.predictions != null)
+        if (analysisObject.Predictions != null)
         {
-            // Sort the predictions to locate the highest one
+            // Sort the Predictions to locate the highest one
             List<Prediction> sortedPredictions = new List<Prediction>();
-            sortedPredictions = analysisObject.predictions.OrderBy(p => p.probability).ToList();
+            sortedPredictions = analysisObject.Predictions.OrderBy(p => p.Probability).ToList();
             Prediction bestPrediction = new Prediction();
             bestPrediction = sortedPredictions[sortedPredictions.Count - 1];
 
-            if (bestPrediction.probability > probabilityThreshold)
+            if (bestPrediction.Probability > probabilityThreshold)
             {
                 quadRenderer = quad.GetComponent<Renderer>() as Renderer;
                 Bounds quadBounds = quadRenderer.bounds;
 
-                // Position the label as close as possible to the Bounding Box of the prediction 
-                // At this point it will not consider depth
-                lastLabelPlaced.transform.parent = quad.transform;
-                lastLabelPlaced.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.boundingBox);
-                //We add this to put the label at the same depth z that the quad
-                lastLabelPlaced.transform.position.Set(lastLabelPlaced.transform.position.x,
-                    lastLabelPlaced.transform.position.y, quad.transform.position.z);
-
                 //Draw a visible boundingBox of the recognized object
-                Vector3 objPosition = new Vector3(lastLabelPlaced.transform.position.x + 0.1f,
-                    lastLabelPlaced.transform.position.y - 0.1f, lastLabelPlaced.transform.position.z);
-                GameObject objBoundingBox = DrawInSpace.Instance.DrawCube(objPosition,
-                    (float)bestPrediction.boundingBox.width, (float)bestPrediction.boundingBox.height);
+                GameObject objBoundingBox = DrawInSpace.Instance.DrawCube(new Vector3(0,0,0),
+                    (float)bestPrediction.BoundingBox.Width, (float)bestPrediction.BoundingBox.Height);
+                objBoundingBox.transform.parent = quad.transform;
+                objBoundingBox.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.BoundingBox);
                 //DrawInSpace.Instance.ChooseMaterial(objBoundingBox, "BoundingBoxTransparent"); //optional
                 //Set the position and scale of the quad depending on user position
-                objBoundingBox.transform.SetParent(transform);
-                BoundingBoxManager.Instance.MakeBoundingBoxInteractible(objBoundingBox);
+                objBoundingBox.transform.SetParent(transform); //break the link with quad (picture)
+                BoundingBoxManager.Instance.MakeBoundingBoxInteractible(objBoundingBox, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
+                objBoundingBox.AddComponent<EventTriggerDelegate>(); //to block picture functions while moving bounding box
 
-                //Link the Text label to the object bounding box
-                lastLabelPlaced.transform.SetParent(objBoundingBox.transform);
+                lastLabelPlaced.transform.position = objBoundingBox.transform.position;
+                //lastLabelPlaced.transform.parent = objBoundingBox.transform; //Link the Text label to the object bounding box
+                // Move the label upward in world space just above the boundingBox.
+                //lastLabelPlaced.transform.Translate(Vector3.up * (float)bestPrediction.BoundingBox.Height/2, Space.World);
+
                 // Set the tag text
-                lastLabelPlaced.text = bestPrediction.tagName;
+                lastLabelPlaced.text = bestPrediction.TagName;
 
                 //Cast a ray from the user's head to the currently placed label, it should hit the object detected by the Service.
                 // At that point it will reposition the label where the ray HL sensor collides with the object,
@@ -257,15 +253,23 @@ public class SceneOrganiser : MonoBehaviour {
                 {
                     lastLabelPlaced.transform.position = objHitInfo.point;
                 }
+
+                //RecognizedObject = bestPrediction.TagName;
+
+                if (ImageCapture.Instance.AppMode == ImageCapture.AppModes.Smart)
+                {
+                    ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
+                }
             }
             else
             {
                 lastLabelPlaced.text = "Unknown";
             }
         }
-        
 
-        // Stop the analysis process
+        //Make a sound to notify the user of the new label
+        AudioPlay.Instance.PlayWithVolume("Bell", 80);
+
         ImageCapture.Instance.ResetImageCapture();
 
 #else
@@ -307,7 +311,7 @@ public class SceneOrganiser : MonoBehaviour {
             }
         }
 #endif
-        
+
     }
 
     private void CreateCube(Vector3 position)
@@ -330,10 +334,10 @@ public class SceneOrganiser : MonoBehaviour {
     /// </summary>
     public Vector3 CalculateBoundingBoxPosition(Bounds b, BoundingBox2D boundingBox)
     {
-        Debug.Log($"BB: left {boundingBox.left}, top {boundingBox.top}, width {boundingBox.width}, height {boundingBox.height}");
+        Debug.Log($"BB: left {boundingBox.Left}, top {boundingBox.Top}, width {boundingBox.Width}, height {boundingBox.Height}");
 
-        double centerFromLeft = boundingBox.left + (boundingBox.width / 2);
-        double centerFromTop = boundingBox.top + (boundingBox.height / 2);
+        double centerFromLeft = boundingBox.Left + (boundingBox.Width / 2);
+        double centerFromTop = boundingBox.Top + (boundingBox.Height / 2);
         Debug.Log($"BB CenterFromLeft {centerFromLeft}, CenterFromTop {centerFromTop}");
 
         double quadWidth = b.size.normalized.x;

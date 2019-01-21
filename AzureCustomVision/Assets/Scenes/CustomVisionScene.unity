@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 728812057}
   - component: {fileID: 728812056}
   - component: {fileID: 728812055}
+  - component: {fileID: 728812060}
   m_Layer: 0
   m_Name: MixedRealityCamera
   m_TagString: MainCamera
@@ -570,6 +571,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &728812060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 728812053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &746409888
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,8 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f850296f971a0468e551ad6ec6c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resizableQuadPrefab: {fileID: 1729816923108204, guid: 90c318af1e80f5d449cdb187467c7ec5,
-    type: 2}
   materials:
   - {fileID: 2100000, guid: 9028a3f41c7a0a64995e1b8aa76d70c5, type: 2}
 --- !u!1001 &891310421
@@ -729,6 +743,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114742747811649402, guid: 3eddd1c29199313478dd3f912bfab2ab,
+        type: 2}
+      propertyPath: Cursor
+      value: 
+      objectReference: {fileID: 1576909393}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3eddd1c29199313478dd3f912bfab2ab, type: 2}
   m_IsPrefabParent: 0

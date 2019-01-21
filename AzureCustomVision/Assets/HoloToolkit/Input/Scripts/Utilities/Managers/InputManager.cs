@@ -410,7 +410,8 @@ namespace HoloToolkit.Unity.InputModule
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(sourceClickedEventData, OnInputClickedEventHandler);
 
-            AfterGestureRecognition.Instance.ExtraTapped();
+            try { AfterGestureRecognition.Instance.ExtraTapped(); }
+            catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
             // NOTE: In Unity UI, a "click" happens on every pointer up, so we have RaiseSourceUp call the pointerClickHandler.
         }
 
@@ -614,7 +615,8 @@ namespace HoloToolkit.Unity.InputModule
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldStartedEventHandler);
 
-            AfterGestureRecognition.Instance.ExtraHoldStarted();
+            try { AfterGestureRecognition.Instance.ExtraHoldStarted(); }
+            catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
         }
 
         private static readonly ExecuteEvents.EventFunction<IHoldHandler> OnHoldCompletedEventHandler =
@@ -632,7 +634,8 @@ namespace HoloToolkit.Unity.InputModule
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldCompletedEventHandler);
 
-            AfterGestureRecognition.Instance.ExtraHoldCompleted();
+            try { AfterGestureRecognition.Instance.ExtraHoldCompleted(); }
+            catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
         }
 
         private static readonly ExecuteEvents.EventFunction<IHoldHandler> OnHoldCanceledEventHandler =
@@ -650,7 +653,8 @@ namespace HoloToolkit.Unity.InputModule
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(holdEventData, OnHoldCanceledEventHandler);
 
-            AfterGestureRecognition.Instance.ExtraHoldCanceled();
+            try { AfterGestureRecognition.Instance.ExtraHoldCanceled(); }
+            catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
         }
 
         #endregion // Hold Events

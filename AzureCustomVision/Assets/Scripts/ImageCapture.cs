@@ -13,6 +13,8 @@ public class ImageCapture : MonoBehaviour {
     /// </summary>
     public static ImageCapture Instance;
 
+    public bool CanTakePicture { get; set; }
+
     /// <summary>
     /// Keep counts of the taps for image renaming
     /// </summary>
@@ -58,7 +60,7 @@ public class ImageCapture : MonoBehaviour {
         Instance = this;
 
         // Change this flag to switch between Analysis Mode and Training Mode 
-        AppMode = AppModes.Analysis;
+        AppMode = AppModes.Smart;
     }
 
     /// <summary>
@@ -80,7 +82,7 @@ public class ImageCapture : MonoBehaviour {
                 Debug.LogFormat("Cannot delete file: ", file.Name);
             }
         }
-
+        CanTakePicture = true;
         SceneOrganiser.Instance.SetCameraStatus("Ready");
     }
 
@@ -89,43 +91,46 @@ public class ImageCapture : MonoBehaviour {
     /// </summary>
     public void ExecuteImageCaptureAndAnalysis()
     {
-        // Update camera status to analysis.
-        SceneOrganiser.Instance.SetCameraStatus("Analysis");
-
-        //Change cursor animation to Loading status
-        CursorManager.Instance.LoadingStart();
-
-        // Create a label in world space using the SceneOrganiser class 
-        // Invisible at this point but correctly positioned where the image was taken
-        SceneOrganiser.Instance.PlaceAnalysisLabel();
-
-        // Set the camera resolution to be the highest possible
-        Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
-
-        Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
-
-        // Begin capture process, set the image format
-        PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
+        if (CanTakePicture == true)
         {
-            photoCaptureObject = captureObject;
+            // Update camera status to analysis.
+            SceneOrganiser.Instance.SetCameraStatus("Analysis");
 
-            CameraParameters camParameters = new CameraParameters
-            {
-                hologramOpacity = 0.0f,
-                cameraResolutionWidth = targetTexture.width,
-                cameraResolutionHeight = targetTexture.height,
-                pixelFormat = CapturePixelFormat.BGRA32
-            };
+            //Change cursor animation to Loading status
+            CursorManager.Instance.LoadingStart();
 
-            // Capture the image from the camera and save it in the App internal folder
-            captureObject.StartPhotoModeAsync(camParameters, delegate (PhotoCapture.PhotoCaptureResult result)
+            // Create a label in world space using the SceneOrganiser class 
+            // Invisible at this point but correctly positioned where the image was taken
+            SceneOrganiser.Instance.PlaceAnalysisLabel();
+
+            // Set the camera resolution to be the highest possible
+            Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
+
+            Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
+
+            // Begin capture process, set the image format
+            PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
             {
-                string filename = string.Format(@"CapturedImage{0}.jpg", captureCount);
-                filePath = Path.Combine(Application.persistentDataPath, filename);
-                captureCount++;
-                photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, OnCapturedPhotoToDisk);
+                photoCaptureObject = captureObject;
+
+                CameraParameters camParameters = new CameraParameters
+                {
+                    hologramOpacity = 0.0f,
+                    cameraResolutionWidth = targetTexture.width,
+                    cameraResolutionHeight = targetTexture.height,
+                    pixelFormat = CapturePixelFormat.BGRA32
+                };
+
+                // Capture the image from the camera and save it in the App internal folder
+                captureObject.StartPhotoModeAsync(camParameters, delegate (PhotoCapture.PhotoCaptureResult result)
+                {
+                    string filename = string.Format(@"CapturedImage{0}.jpg", captureCount);
+                    filePath = Path.Combine(Application.persistentDataPath, filename);
+                    captureCount++;
+                    photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, OnCapturedPhotoToDisk);
+                });
             });
-        });
+        }
     }
 
     /// <summary>
