@@ -68,6 +68,9 @@ public class CustomVisionAnalyser : MonoBehaviour {
             // Send the request
             yield return unityWebRequest.SendWebRequest();
 
+            if (unityWebRequest.error != "")
+                DialogManager.Instance.LaunchBasicDialog(1, "Internet Error", "Please verify your internet connection");
+
             string jsonResponse = unityWebRequest.downloadHandler.text;
 
             Debug.Log("response: " + jsonResponse);

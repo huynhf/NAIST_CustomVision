@@ -144,12 +144,14 @@ public class SceneOrganiser : MonoBehaviour {
     public void PlaceAnalysisLabel()
     {
         GameObject panel = new GameObject("Label");
-        TextMeshPro label = panel.AddComponent<TextMeshPro>();
+        TextMeshPro label = panel.AddComponent<TextMeshPro>(); //new TextMeshPro();
         label.fontSizeMin = 1;
         label.fontSizeMax = 70;
         label.enableAutoSizing = true;
-        label.rectTransform.sizeDelta = new Vector2(5, 1f);
-        label.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+        label.rectTransform.sizeDelta = new Vector2(2, 1);
+        label.transform.localScale = new Vector3(0.1f, 0.1f, 0.01f);
+        //label.alignment = TextAlignmentOptions.Center;
+         label.alignment = TextAlignmentOptions.Midline;
 
         // Do a raycast into the world based on the user's
         // head position and orientation.
@@ -165,7 +167,7 @@ public class SceneOrganiser : MonoBehaviour {
             label.transform.Translate(Vector3.up * 0.1f, Space.World);
             label.transform.rotation = Quaternion.LookRotation(gazeDirection);// * Quaternion.Euler(0, 90, 0);
 #if OBJDETECT
-            label.text = hitInfo.distance.ToString(); // label.transform.position.ToString(); //Uncomment only to know position while testing
+            //label.text = hitInfo.distance.ToString(); // label.transform.position.ToString(); //Uncomment only to know position while testing
 #endif
             lastLabelPlaced = label;
         }
@@ -224,20 +226,21 @@ public class SceneOrganiser : MonoBehaviour {
                 Bounds quadBounds = quadRenderer.bounds;
 
                 //Draw a visible boundingBox of the recognized object
-                GameObject objBoundingBox = DrawInSpace.Instance.DrawCube(new Vector3(0,0,0),
-                    (float)bestPrediction.BoundingBox.Width, (float)bestPrediction.BoundingBox.Height);
+                GameObject objBoundingBox = DrawInSpace.Instance.DrawCube((float)bestPrediction.BoundingBox.Width, (float)bestPrediction.BoundingBox.Height);
                 objBoundingBox.transform.parent = quad.transform;
                 objBoundingBox.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.BoundingBox);
-                //DrawInSpace.Instance.ChooseMaterial(objBoundingBox, "BoundingBoxTransparent"); //optional
+                DrawInSpace.Instance.ChooseMaterial(objBoundingBox, "BoundingBoxTransparentFlashy"); //optional
                 //Set the position and scale of the quad depending on user position
                 objBoundingBox.transform.SetParent(transform); //break the link with quad (picture)
                 BoundingBoxManager.Instance.MakeBoundingBoxInteractible(objBoundingBox, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
                 objBoundingBox.AddComponent<EventTriggerDelegate>(); //to block picture functions while moving bounding box
 
                 lastLabelPlaced.transform.position = objBoundingBox.transform.position;
-                //lastLabelPlaced.transform.parent = objBoundingBox.transform; //Link the Text label to the object bounding box
                 // Move the label upward in world space just above the boundingBox.
-                //lastLabelPlaced.transform.Translate(Vector3.up * (float)bestPrediction.BoundingBox.Height/2, Space.World);
+                lastLabelPlaced.transform.Translate(Vector3.up * (float)(bestPrediction.BoundingBox.Height/2+0.1f), Space.World); //Vector3 = World Space and Transform = Local Space
+                lastLabelPlaced.transform.parent = objBoundingBox.transform; //Link the Text label to the object bounding box
+
+                //DialogManager.Instance.LaunchBasicDialog(1, "Positions", $"label {lastLabelPlaced.transform.position}, bbox {objBoundingBox.transform.position}");
 
                 // Set the tag text
                 lastLabelPlaced.text = bestPrediction.TagName;
@@ -245,14 +248,14 @@ public class SceneOrganiser : MonoBehaviour {
                 //Cast a ray from the user's head to the currently placed label, it should hit the object detected by the Service.
                 // At that point it will reposition the label where the ray HL sensor collides with the object,
                 // (using the HL spatial tracking)
-                Debug.Log("Repositioning Label");
-                Vector3 headPosition = Camera.main.transform.position;
-                RaycastHit objHitInfo;
-                Vector3 objDirection = lastLabelPlaced.transform.position;
-                if (Physics.Raycast(headPosition, objDirection, out objHitInfo, 30.0f, SpatialMapping.LayerMask))
-                {
-                    lastLabelPlaced.transform.position = objHitInfo.point;
-                }
+                //Debug.Log("Repositioning Label");
+                //Vector3 headPosition = Camera.main.transform.position;
+                //RaycastHit objHitInfo;
+                //Vector3 objDirection = lastLabelPlaced.transform.position;
+                //if (Physics.Raycast(headPosition, objDirection, out objHitInfo, 30.0f, SpatialMapping.LayerMask))
+                //{
+                //    lastLabelPlaced.transform.position = objHitInfo.point;
+                //}
 
                 //RecognizedObject = bestPrediction.TagName;
 
@@ -264,8 +267,15 @@ public class SceneOrganiser : MonoBehaviour {
             else
             {
                 lastLabelPlaced.text = "Unknown";
+                GameObject obj = DrawInSpace.Instance.DrawCube(0.05f, 0.05f, 0.05f, lastLabelPlaced.transform.position);
+                lastLabelPlaced.transform.Translate(Vector3.up * 0.1f, Space.World);
+                DrawInSpace.Instance.ChooseMaterial(obj, "AppBarBackgroundBar");
+                BoundingBoxManager.Instance.MakeBoundingBoxInteractible(obj);
+                lastLabelPlaced.transform.SetParent(obj.transform);
             }
         }
+
+        lastLabelPlaced.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
 
         //Make a sound to notify the user of the new label
         AudioPlay.Instance.PlayWithVolume("Bell", 80);

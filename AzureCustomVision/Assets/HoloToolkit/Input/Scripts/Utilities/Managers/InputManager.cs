@@ -410,8 +410,16 @@ namespace HoloToolkit.Unity.InputModule
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(sourceClickedEventData, OnInputClickedEventHandler);
 
-            try { AfterGestureRecognition.Instance.ExtraTapped(); }
-            catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
+            if (tapCount == 1)
+            {
+                try { AfterGestureRecognition.Instance.ExtraTapped(); }
+                catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
+            }
+            else if (tapCount == 2)
+            {
+                try { AfterGestureRecognition.Instance.DoubleTapped(); }
+                catch { Debug.Log("Add AfterGestureRecognition script if you want to use Extra Actions"); }
+            }
             // NOTE: In Unity UI, a "click" happens on every pointer up, so we have RaiseSourceUp call the pointerClickHandler.
         }
 
