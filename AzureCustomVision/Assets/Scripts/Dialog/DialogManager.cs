@@ -1,5 +1,6 @@
 ﻿using HoloToolkit.Unity.Buttons;
 using HoloToolkit.UX.Dialog;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,10 +15,11 @@ public class DialogManager : MonoBehaviour {
     private bool isDialogLaunched;
 
     [SerializeField]
-    public GameObject resultText;
+    private GameObject resultText;
     /// <summary>
     /// Used to report the dialogResult. OK, Cancel etc.
     /// The button that was clicked to respond to the Dialog.
+    /// Usefull if we want to display result directly in the scene
     /// </summary>
     public GameObject ResultText
     {
@@ -81,7 +83,6 @@ public class DialogManager : MonoBehaviour {
     private void OnEnable()
     {
         resultTextMesh = ResultText.GetComponent<TextMesh>();
-        //resultTextMesh = new TextMesh();
         button = GetComponent<Button>();
         if (button != null)
         {
@@ -109,6 +110,28 @@ public class DialogManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// If the clicked button has the sme name as dialogBtnName,
+    /// the action method is called
+    /// For example : "Yes" button and DoSomething method
+    /// => StartCoroutine(RegisterActionForDialogButton("Yes", DoSomething));
+    /// 
+    /// Important : method is of type void method() = no return value, no parameters
+    /// Other functions has te be created if you want to use parameters or return value
+    /// => Action<int,string> = int and string params, Func<string,int> = string param and int return value
+    /// </summary>
+    public IEnumerator RegisterActionForDialogButton(string dialogBtnName, Action method)
+    {
+        while(resultTextMesh.text != dialogBtnName)
+        {
+            yield return null;
+        }
+
+        method();
+
+        yield break;
+    }
+
     private void OnButtonClicked(GameObject obj)
     {
         //Do nothing
@@ -122,7 +145,7 @@ public class DialogManager : MonoBehaviour {
     {
         // Get the result text from the Dialog
         resultTextMesh.text = result.Result.ToString();
-        //CursorManager.Instance.LoadingStop();
+        //LaunchBasicDialog(1, "Debug", resultTextMesh.text);
     }
 }
 

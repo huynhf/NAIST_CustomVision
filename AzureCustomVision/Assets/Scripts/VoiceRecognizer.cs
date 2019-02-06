@@ -58,7 +58,7 @@ public class VoiceRecognizer : MonoBehaviour {
         {
             // When a word is recognized, the following line will be called
             // The user wants to add a new object for recognition
-            CustomVisionTrainer.Instance.AddNewObject();
+            CustomVisionTrainer.Instance.AddNewTag();
             keywordRecognizer.Stop();
         });
 
@@ -75,6 +75,7 @@ public class VoiceRecognizer : MonoBehaviour {
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         Action keywordAction;
+        DialogManager.Instance.LaunchBasicDialog(1, "Debug", args.text);
         // if the keyword recognized is in our dictionary, call that Action.
         if (_keywords.TryGetValue(args.text, out keywordAction))
         {

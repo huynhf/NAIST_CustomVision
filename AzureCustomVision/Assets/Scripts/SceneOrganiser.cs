@@ -39,7 +39,7 @@ public class SceneOrganiser : MonoBehaviour {
     /// <summary>
     /// Reference to the last label positioned
     /// </summary>
-    public TextMeshPro lastLabelPlaced = null;
+    public TextMeshPro LastLabelPlaced { get; set; }
 
     /// <summary>
     /// Current threshold accepted for displaying the label
@@ -132,10 +132,27 @@ public class SceneOrganiser : MonoBehaviour {
                 case "analysis":
                     textColor = "red";
                     break;
+                case "choosing":
+                    textColor = "blue";
+                    break;
             }
 
             cameraStatusIndicator.GetComponent<TextMeshPro>().text = $"Camera Status:\n<color={textColor}>{statusText}..</color>";
         }
+    }
+
+    public void SetLastLabel(string text)
+    {
+        if(text == "Unknown")
+        {
+            GameObject obj = DrawInSpace.Instance.DrawCube(0.05f, 0.05f, 0.05f, LastLabelPlaced.transform.position);
+            LastLabelPlaced.transform.Translate(Vector3.up * 0.1f, Space.World);
+            DrawInSpace.Instance.ChooseMaterial(obj, "AppBarBackgroundBar");
+            BoundingBoxManager.Instance.MakeBoundingBoxInteractible(obj);
+            LastLabelPlaced.transform.SetParent(obj.transform);
+        }
+
+        LastLabelPlaced.text = text;
     }
 
     /// <summary>
@@ -169,7 +186,7 @@ public class SceneOrganiser : MonoBehaviour {
 #if OBJDETECT
             //label.text = hitInfo.distance.ToString(); // label.transform.position.ToString(); //Uncomment only to know position while testing
 #endif
-            lastLabelPlaced = label;
+            LastLabelPlaced = label;
         }
 
 #if OBJDETECT
@@ -235,15 +252,15 @@ public class SceneOrganiser : MonoBehaviour {
                 BoundingBoxManager.Instance.MakeBoundingBoxInteractible(objBoundingBox, HoloToolkit.Unity.UX.BoundingBox.FlattenModeEnum.FlattenAuto);
                 objBoundingBox.AddComponent<EventTriggerDelegate>(); //to block picture functions while moving bounding box
 
-                lastLabelPlaced.transform.position = objBoundingBox.transform.position;
+                LastLabelPlaced.transform.position = objBoundingBox.transform.position;
                 // Move the label upward in world space just above the boundingBox.
-                lastLabelPlaced.transform.Translate(Vector3.up * (float)(bestPrediction.BoundingBox.Height/2+0.1f), Space.World); //Vector3 = World Space and Transform = Local Space
-                lastLabelPlaced.transform.parent = objBoundingBox.transform; //Link the Text label to the object bounding box
+                LastLabelPlaced.transform.Translate(Vector3.up * (float)(bestPrediction.BoundingBox.Height / 2 + 0.1f), Space.World); //Vector3 = World Space and Transform = Local Space
+                LastLabelPlaced.transform.parent = objBoundingBox.transform; //Link the Text label to the object bounding box
 
                 //DialogManager.Instance.LaunchBasicDialog(1, "Positions", $"label {lastLabelPlaced.transform.position}, bbox {objBoundingBox.transform.position}");
 
                 // Set the tag text
-                lastLabelPlaced.text = bestPrediction.TagName;
+                SetLastLabel(bestPrediction.TagName);
 
                 //Cast a ray from the user's head to the currently placed label, it should hit the object detected by the Service.
                 // At that point it will reposition the label where the ray HL sensor collides with the object,
@@ -257,25 +274,24 @@ public class SceneOrganiser : MonoBehaviour {
                 //    lastLabelPlaced.transform.position = objHitInfo.point;
                 //}
 
-                //RecognizedObject = bestPrediction.TagName;
+                RecognizedObject = bestPrediction.TagName;
 
-                if (ImageCapture.Instance.AppMode == ImageCapture.AppModes.Smart)
-                {
-                    ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
-                }
+                LastLabelPlaced.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+
             }
             else
-            {
-                lastLabelPlaced.text = "Unknown";
-                GameObject obj = DrawInSpace.Instance.DrawCube(0.05f, 0.05f, 0.05f, lastLabelPlaced.transform.position);
-                lastLabelPlaced.transform.Translate(Vector3.up * 0.1f, Space.World);
-                DrawInSpace.Instance.ChooseMaterial(obj, "AppBarBackgroundBar");
-                BoundingBoxManager.Instance.MakeBoundingBoxInteractible(obj);
-                lastLabelPlaced.transform.SetParent(obj.transform);
-            }
-        }
+                RecognizedObject = null;
 
-        lastLabelPlaced.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        }
+        else
+            RecognizedObject = null;
+
+
+        if (ImageCapture.Instance.AppMode == ImageCapture.AppModes.Smart)
+        {
+            ImageCapture.Instance.UploadPhotoAfterAnalysis(RecognizedObject);
+        }
+        
 
         //Make a sound to notify the user of the new label
         AudioPlay.Instance.PlayWithVolume("Bell", 80);
@@ -301,7 +317,7 @@ public class SceneOrganiser : MonoBehaviour {
             }
 
             if (recognizedObjects == 0)
-                lastLabelPlaced.text = "Unknown";
+                SetLastLabel("Unknown");
 
             //Make a sound to notify the user of the new label
             AudioPlay.Instance.PlayWithVolume("Bell", 80);

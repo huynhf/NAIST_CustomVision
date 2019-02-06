@@ -27,12 +27,15 @@ public class AfterGestureRecognition : MonoBehaviour {
         //Vector3 cursorPosition = CursorManager.Instance.GetCursorPositionOnMesh();
         //Debug.Log($"Cursor position = {cursorPosition}");
         //DrawInSpace.Instance.DrawStaticRectangle(CursorManager.Instance.GetCursorPositionOnMesh(), 0.1f, 0.1f);
+
+        //InputFieldManager.Instance.OpenInputFieldDialog();
+        
     }
 
     public void DoubleTapped() //not working in unity but works with Hololens
     {
         Debug.Log($"Double Tapped called");
-        //DialogManager.Instance.LaunchBasicDialog(1, "Debug", "Double Tapped called");
+        DialogManager.Instance.LaunchBasicDialog(1, "Debug", "Double Tapped called");
 
         RaycastHit hit;
         Ray landingRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);

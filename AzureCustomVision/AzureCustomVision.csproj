@@ -664,7 +664,9 @@
     <Compile Include="Assets\Scripts\Dialog\TestDialog.cs" />
     <Compile Include="Assets\Scripts\EventTriggerDelegate.cs" />
     <Compile Include="Assets\Scripts\ImageCapture.cs" />
+    <Compile Include="Assets\Scripts\InputFieldManager.cs" />
     <Compile Include="Assets\Scripts\RichDialogShell.cs" />
+    <Compile Include="Assets\Scripts\SceneContentAdjuster.cs" />
     <Compile Include="Assets\Scripts\SceneOrganiser.cs" />
     <Compile Include="Assets\Scripts\VoiceRecognizer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

@@ -177,19 +177,24 @@ public class ImageCapture : MonoBehaviour {
     {
         if(AppMode == AppModes.Smart)
         {
-            // Update camera status to uploading image.
-            SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
-
             // Call training using captured image
-            if(tag == "More than one" || tag == null)
+            if (tag == "More than one")
             {
                 //Reset scene
                 ResetImageCapture();
             }
-            //else if (tag == null)
-            //    CustomVisionTrainer.Instance.RequestTagSelection();
+            else if (tag == null)
+            {
+                SceneOrganiser.Instance.SetCameraStatus("Choosing");
+                //StartCoroutine(CustomVisionTrainer.Instance.AddNewTagRequest());
+                CustomVisionTrainer.Instance.AddNewTagRequest();
+            }
+                
             else
             {
+                // Update camera status to uploading image.
+                SceneOrganiser.Instance.SetCameraStatus("Uploading Image");
+
                 //Upload photo with recognized tag
                 CustomVisionTrainer.Instance.EnableTextDisplay(true);
                 CustomVisionTrainer.Instance.VerifyTag(tag);

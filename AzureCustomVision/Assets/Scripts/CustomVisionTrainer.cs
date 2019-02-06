@@ -66,7 +66,7 @@ public class CustomVisionTrainer : MonoBehaviour {
     /// </summary>
     private void Start()
     {
-        StartCoroutine(GetTagsFromCloud());
+        UpdateTagsList();
     }
 
     internal void EnableTextDisplay(bool state) 
@@ -74,13 +74,13 @@ public class CustomVisionTrainer : MonoBehaviour {
         if (state == true)
         {
             //Create a new label just above the analysis label
-            Vector3 lastLabelPosition = SceneOrganiser.Instance.lastLabelPlaced.transform.position;
-            Quaternion lastLabelRotation = SceneOrganiser.Instance.lastLabelPlaced.transform.rotation;
+            Vector3 lastLabelPosition = SceneOrganiser.Instance.LastLabelPlaced.transform.position;
+            Quaternion lastLabelRotation = SceneOrganiser.Instance.LastLabelPlaced.transform.rotation;
             SceneOrganiser.Instance.PlaceAnalysisLabel();
-            trainingUI_TextMesh = SceneOrganiser.Instance.lastLabelPlaced;
+            trainingUI_TextMesh = SceneOrganiser.Instance.LastLabelPlaced;
             trainingUI_TextMesh.transform.position = lastLabelPosition;
             trainingUI_TextMesh.transform.Translate(Vector3.up * 0.2f, Space.World);
-            trainingUI_TextMesh.transform.rotation = lastLabelRotation; // Quaternion.LookRotation(Camera.main.transform.forward);
+            trainingUI_TextMesh.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward); //lastLabelRotation;
 
             trainingUI_TextMesh.text = "test";
             //trainingUI_TextMesh.gameObject.SetActive(state);
@@ -93,6 +93,20 @@ public class CustomVisionTrainer : MonoBehaviour {
             AudioPlay.Instance.PlayWithVolume("Bubble-3", 20); //make a sound to notify the disparition of the label
         }
 
+    }
+
+    internal void AddNewTagRequest()
+    {
+        DialogManager.Instance.LaunchBasicDialog(2, "No objects recognized", "Do you want to add a new tag for this object ?");
+
+        StartCoroutine(DialogManager.Instance.RegisterActionForDialogButton("Yes", RequestTagSelection));
+    }
+
+    internal void AddNewTag()
+    {
+        DialogManager.Instance.LaunchBasicDialog(1, "Debug", "AddNewTag called");
+
+        UpdateTagsList();
     }
 
     internal void RequestTagSelection()
@@ -118,6 +132,11 @@ public class CustomVisionTrainer : MonoBehaviour {
                 StartCoroutine(SubmitImageForTraining(ImageCapture.Instance.filePath, spokenTag));
             }
         } 
+    }
+
+    void UpdateTagsList()
+    {
+        StartCoroutine(GetTagsFromCloud()); 
     }
 
     internal IEnumerator GetTagsFromCloud()
@@ -347,13 +366,5 @@ public class CustomVisionTrainer : MonoBehaviour {
         FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
         BinaryReader binaryReader = new BinaryReader(fileStream);
         return binaryReader.ReadBytes((int)fileStream.Length);
-    }
-
-    /// <summary>
-    /// Add a new object tag in the list of objects to recognize
-    /// </summary>
-    public void AddNewObject()
-    {
-
     }
 }
