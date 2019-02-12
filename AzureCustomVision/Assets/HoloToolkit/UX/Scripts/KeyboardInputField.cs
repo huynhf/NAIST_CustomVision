@@ -58,7 +58,7 @@ namespace HoloToolkit.UI.Keyboard
         /// Delegate function for getting keyboard input
         /// </summary>
         /// <param name="newText"></param>
-        private void Keyboard_OnTextUpdated(string newText)
+        public void Keyboard_OnTextUpdated(string newText)
         {
             text = newText;
         }

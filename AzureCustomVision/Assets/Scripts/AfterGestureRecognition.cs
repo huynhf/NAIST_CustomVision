@@ -26,16 +26,14 @@ public class AfterGestureRecognition : MonoBehaviour {
 
         //Vector3 cursorPosition = CursorManager.Instance.GetCursorPositionOnMesh();
         //Debug.Log($"Cursor position = {cursorPosition}");
-        //DrawInSpace.Instance.DrawStaticRectangle(CursorManager.Instance.GetCursorPositionOnMesh(), 0.1f, 0.1f);
-
-        //InputFieldManager.Instance.OpenInputFieldDialog();
-        
+        //DrawInSpace.Instance.DrawStaticRectangle(CursorManager.Instance.GetCursorPositionOnMesh(), 0.1f, 0.1f);        
     }
 
     public void DoubleTapped() //not working in unity but works with Hololens
     {
         Debug.Log($"Double Tapped called");
-        DialogManager.Instance.LaunchBasicDialog(1, "Debug", "Double Tapped called");
+        //DialogManager.Instance.LaunchBasicDialog(1, "Debug", "Double Tapped called");
+        SpatialMappingManager.Instance.DrawVisualMeshes = !SpatialMappingManager.Instance.DrawVisualMeshes;
 
         RaycastHit hit;
         Ray landingRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -50,7 +48,7 @@ public class AfterGestureRecognition : MonoBehaviour {
             //DialogManager.Instance.LaunchBasicDialog(1, "Tag", $"{hit.collider.tag} and layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
             if (hit.collider.tag == "BoundingBox")
             {
-                //SpatialMappingManager.Instance.DrawVisualMeshes = true;
+                
                 hit.collider.gameObject.transform.position = CursorManager.Instance.GetCursorPositionOnMesh();
             }
         }

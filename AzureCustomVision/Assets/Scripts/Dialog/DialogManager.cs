@@ -2,6 +2,7 @@
 using HoloToolkit.UX.Dialog;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogManager : MonoBehaviour {
@@ -38,6 +39,11 @@ public class DialogManager : MonoBehaviour {
     [Range(0, 2)]
     private int numButtons = 1;
 
+    /// <summary>
+    /// List of functions that will be called when a dialog button is clicked
+    /// </summary>
+    private Dictionary<string, Action> callbacks = new Dictionary<string, Action>();
+
     private TextMesh resultTextMesh;
 
     // Dialog button that will be clicked by user
@@ -46,6 +52,17 @@ public class DialogManager : MonoBehaviour {
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        Action registeredAction;
+
+        if (callbacks.TryGetValue(resultTextMesh.text, out registeredAction))
+        {
+            registeredAction.Invoke();
+            resultTextMesh.text = "";
+        }
     }
 
     /// <summary>
@@ -120,16 +137,12 @@ public class DialogManager : MonoBehaviour {
     /// Other functions has te be created if you want to use parameters or return value
     /// => Action<int,string> = int and string params, Func<string,int> = string param and int return value
     /// </summary>
-    public IEnumerator RegisterActionForDialogButton(string dialogBtnName, Action method)
+    public void RegisterActionForDialogButton(string dialogBtnName, Action method)
     {
-        while(resultTextMesh.text != dialogBtnName)
+        if (!callbacks.ContainsKey(dialogBtnName))
         {
-            yield return null;
+            callbacks.Add(dialogBtnName, method);
         }
-
-        method();
-
-        yield break;
     }
 
     private void OnButtonClicked(GameObject obj)

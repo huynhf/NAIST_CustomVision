@@ -45,7 +45,7 @@ public class SceneOrganiser : MonoBehaviour {
     /// Current threshold accepted for displaying the label
     /// Reduce this value to display the recognition more often
     /// </summary>
-    internal float probabilityThreshold = 0.3f;
+    internal float probabilityThreshold = 0.5f;
 
 #if OBJDETECT
     

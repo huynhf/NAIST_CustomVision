@@ -99,22 +99,26 @@ public class CustomVisionTrainer : MonoBehaviour {
     {
         DialogManager.Instance.LaunchBasicDialog(2, "No objects recognized", "Do you want to add a new tag for this object ?");
 
-        StartCoroutine(DialogManager.Instance.RegisterActionForDialogButton("Yes", RequestTagSelection));
+        DialogManager.Instance.RegisterActionForDialogButton("Yes", RequestTagSelection);
+        DialogManager.Instance.RegisterActionForDialogButton("No", () =>
+            { SceneOrganiser.Instance.SetLastLabel("Unknown"); });
     }
 
-    internal void AddNewTag()
+    internal void AddNewTag(string tag)
     {
-        DialogManager.Instance.LaunchBasicDialog(1, "Debug", "AddNewTag called");
+        DialogManager.Instance.LaunchBasicDialog(1, "Debug", $"New tag : {tag}");
 
         UpdateTagsList();
     }
 
     internal void RequestTagSelection()
     {
-        EnableTextDisplay(true);
-        trainingUI_TextMesh.text = $" \nUse voice command \nto choose between the following actions: \nAdd object \nor say Discard";
+        //EnableTextDisplay(true);
+        //trainingUI_TextMesh.text = $" \nUse voice command \nto choose between the following actions: \nAdd object \nor say Discard";
 
-        VoiceRecognizer.Instance.keywordRecognizer.Start();
+        //VoiceRecognizer.Instance.keywordRecognizer.Start();
+
+        InputFieldManager.Instance.OpenInputFieldDialog();
     }
 
     /// <summary>

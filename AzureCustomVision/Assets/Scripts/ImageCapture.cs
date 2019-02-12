@@ -185,7 +185,7 @@ public class ImageCapture : MonoBehaviour {
             }
             else if (tag == null)
             {
-                SceneOrganiser.Instance.SetCameraStatus("Choosing");
+                //SceneOrganiser.Instance.SetCameraStatus("Choosing");
                 //StartCoroutine(CustomVisionTrainer.Instance.AddNewTagRequest());
                 CustomVisionTrainer.Instance.AddNewTagRequest();
             }

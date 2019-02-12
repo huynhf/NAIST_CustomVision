@@ -58,7 +58,7 @@ public class VoiceRecognizer : MonoBehaviour {
         {
             // When a word is recognized, the following line will be called
             // The user wants to add a new object for recognition
-            CustomVisionTrainer.Instance.AddNewTag();
+            CustomVisionTrainer.Instance.AddNewTag("Test");
             keywordRecognizer.Stop();
         });
 
