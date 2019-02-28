@@ -12,7 +12,6 @@ public class DialogManager : MonoBehaviour {
     [SerializeField]
     private Dialog dialogPrefab = null;
 
-    [SerializeField]
     private bool isDialogLaunched;
 
     [SerializeField]
@@ -60,6 +59,8 @@ public class DialogManager : MonoBehaviour {
 
         if (callbacks.TryGetValue(resultTextMesh.text, out registeredAction))
         {
+            //A key equal to the clicked button text has been recognized,
+            //the corresponding action will be called
             registeredAction.Invoke();
             resultTextMesh.text = "";
         }
@@ -107,6 +108,10 @@ public class DialogManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Function created to call LaunchDialog() more easily.
+    /// Uses only OK and Yes/No dialogs.
+    /// </summary>
     public void LaunchBasicDialog(int nbButtons, string title, string message)
     {
         if (nbButtons != 0)
@@ -139,10 +144,12 @@ public class DialogManager : MonoBehaviour {
     /// </summary>
     public void RegisterActionForDialogButton(string dialogBtnName, Action method)
     {
-        if (!callbacks.ContainsKey(dialogBtnName))
+        if (callbacks.ContainsKey(dialogBtnName))
         {
-            callbacks.Add(dialogBtnName, method);
+            //If already present, remove the key and the associated action 
+            callbacks.Remove(dialogBtnName);
         }
+        callbacks.Add(dialogBtnName, method);
     }
 
     private void OnButtonClicked(GameObject obj)

@@ -50,6 +50,8 @@ public class CursorManager : MonoBehaviour {
         {
             Debug.Log("No mesh hit\n");
             DialogManager.Instance.LaunchBasicDialog(1, "Debug", "No mesh hit by the cursor");
+            ImageCapture.Instance.ResetImageCapture();
+
             return new Vector3(0,0,0);
         }
     }
