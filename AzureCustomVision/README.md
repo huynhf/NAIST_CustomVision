@@ -1,4 +1,4 @@
-# AzureCustomVision
+﻿# AzureCustomVision
 NAIST project : Hololens Object Detection implementation
 
 This project was based on the [MR and Azure 310](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-310) course.
@@ -22,6 +22,8 @@ We take a picture of the real world, analyse it, tag objects with words and disp
 
 
 ## II. Installation
+
+svfvsfvsvsfvfvsvsvsfvsvsvsf
 
 ## III. Getting started
 
