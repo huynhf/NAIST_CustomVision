@@ -24,6 +24,8 @@ We take a picture of the real world, analyse it, tag objects with words and disp
 ## II. Installation
 
 svfvsfvsvsfvfvsvsvsfvsvsvsf
+wvcwvwvw
+wvwvwvwvevwvwvwvwv
 
 ## III. Getting started
 
